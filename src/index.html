@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangala</title>
+
+</head>
+<body>
+    <div class="logo">logo</div>
+
+    <div class="login">
+        <form action="">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="Oi">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="oi">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form> 
+    </div>
+    <div class="user">
+        <div class="user-name">André Matilde</div>
+        <form action="">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+
+
+    <div class="game">game
+        <div class="board"></div>
+        <div class="messages"></div>
+    </div>
+
+
+    <div class="config">
+        <form action="">
+            <div class="game-mode">
+                <label for="single-player">SinglePlayer </label>
+                <input type="radio" id="single-player" name="game-mode" value="singleplayer" required>
+                <label for="game-mode">Multiplayer </label>
+                <input type="radio" id="multi-player" name="game-mode" value="multiplayer">
+            </div>
+
+            <label for="holes">Number of holes </label>
+            <input type="number" id="holes" name="holes" value="6" max="30" min="1">
+
+            <label for="seeds">Number of seeds </label>
+            <input type="number" id="seeds" name="seeds" value="4" max="50" min="1">
+
+            <div class="turn">
+                <label for="first">Start first </label>
+                <input type="radio" id="first" name="turn" value="first" required>
+                <label for="last">Start last </label>
+                <input type="radio" id="last" name="turn" value="last">
+            </div>
+
+            <input type="submit" value="Start">
+            <input type="reset" value="Reset">
+        </form> 
+    </div>
+
+    <div class="result">Game Results
+        <div>Player 1: <span>0</span></div>
+        <div>Player 2: <span>0</span></div>
+        <form action="">
+            <input type="submit" value="Quit">
+        </form>
+        <button class="show-instructions"><a href="#instructions">Instructions</a></button>
+    </div>
+
+    <div class="learboard"></div>
+    
+    <div class="instructions">instrucions</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+body {
+    border-color: black;
+    border-width: 3px;
+    border-style: dotted;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 3fr;
+}
+
+div {
+    border-color: red;
+    border-width: 1px;
+    border-style: dotted;
+}
+
+.logo {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.login, .user {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+}
+
+.user, .config{
+    visibility: hidden;
+}
+
+.game {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+}
+
+.config, .result {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.instrucions {
+    grid-column: 1 / 4;
+}
+
+.login form, .user {
+    display: flex;
+}
+
+.config form {
+    display: flex;
+    flex-flow: column;
+}

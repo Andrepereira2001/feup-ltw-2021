@@ -1,9 +1,6 @@
 /*  ---------Structure----------   */
 
 body {
-    border-color: black;
-    border-width: 3px;
-    border-style: dotted;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 3fr;
@@ -12,9 +9,8 @@ body {
 }
 
 div {
-    
-    border-width: 1px;
     border-style: dotted;
+    border-width: 1px;
 }
 
 .user, .config{
@@ -29,7 +25,7 @@ div {
 }
 
 .logo img {
-    width: 300px;
+    max-width: 300px;
 }
 
 /*  ---------Login/User----------   */
@@ -41,6 +37,10 @@ div {
 
 .login form, .user{
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /*  ---------Game----------   */
@@ -51,6 +51,8 @@ div {
     display: flex;
     flex-flow: column;
     justify-content: center;
+    height: 70vh;
+    width: 70vw;
 }
 
 /*  Board   */
@@ -59,6 +61,20 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #EF5C36;
+    margin: auto;
+    border-radius: 10px;
+    height: 40%;
+    width: 80%;
+}
+
+.gaming-holes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .up-holes, .down-holes{
@@ -66,6 +82,30 @@ div {
     flex-flow: row;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.hole{
+    background-color: #333433;
+    border-radius: 15px;
+    margin: 3px;
+    width: 23%;
+    height: 80%;
+} 
+
+.hole.big{
+    width: 15vw;
+    height: 26vh;
+}
+
+.hole.big.left{
+    margin-left: 3%;
+}
+
+.hole.big.right{
+    margin-right: 3%;
 }
 
 /*  Messages   */

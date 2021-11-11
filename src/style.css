@@ -43,6 +43,21 @@ div {
     align-items: center;
 }
 
+.login form .input-text {
+    background-color: #white;
+    border-color: #EF5C36; 
+    width: 350px; 
+    height: 30px;  
+}
+
+.login form .input-button {
+    background-color: #EF5C36;
+    color: white; 
+    width: 150px;
+    font-size:medium;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 /*  ---------Game----------   */
 
 .game {

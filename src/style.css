@@ -1,3 +1,5 @@
+/*  ---------Structure----------   */
+
 body {
     border-color: black;
     border-width: 3px;
@@ -5,27 +7,43 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 3fr;
+    background-color: #333433;
+    color: white;
 }
 
 div {
-    border-color: red;
+    
     border-width: 1px;
     border-style: dotted;
 }
+
+.user, .config{
+    visibility: hidden;
+}
+
+/*  ---------Logo----------   */
 
 .logo {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
 
+.logo img {
+    width: 200px;
+}
+
+/*  ---------Login/User----------   */
+
 .login, .user {
     grid-column: 2 / 4;
     grid-row: 1 / 2;
 }
 
-.user, .config{
-    visibility: hidden;
+.login form, .user{
+    display: flex;
 }
+
+/*  ---------Game----------   */
 
 .game {
     grid-column: 1 / 3;
@@ -35,23 +53,7 @@ div {
     justify-content: center;
 }
 
-.config, .result {
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-}
-
-.instrucions {
-    grid-column: 1 / 4;
-}
-
-.login form, .user{
-    display: flex;
-}
-
-.config form{
-    display: flex;
-    flex-flow: column;
-}
+/*  Board   */
 
 .board{
     display: flex;
@@ -66,4 +68,24 @@ div {
     align-items: center;
 }
 
+/*  Messages   */
 
+/*  ---------Config/Result----------   */
+
+.config, .result {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.config form{
+    display: flex;
+    flex-flow: column;
+}
+
+/*  ---------Instructions----------   */
+
+.instrucions {
+    grid-column: 1 / 4;
+}
+
+/*  ---------LeaderBoard----------   */

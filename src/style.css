@@ -1,4 +1,10 @@
+@import url(https://allfont.net/allfont.css?fonts=league-gothic);
+
 /*  ---------Structure----------   */
+
+* {
+    font-family: 'League Gothic', arial;
+}
 
 body {
     display: grid;
@@ -8,10 +14,7 @@ body {
     color: white;
 }
 
-div {
-    border-style: dotted;
-    border-width: 1px;
-}
+
 
 .user, .config{
     visibility: hidden;
@@ -37,25 +40,27 @@ div {
 
 .login form, .user{
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .login form .input-text {
-    background-color: #white;
+    background-color: white;
     border-color: #EF5C36; 
-    width: 350px; 
-    height: 30px;  
+    width: 35%; 
+    height: 20%;  
 }
 
 .login form .input-button {
     background-color: #EF5C36;
     color: white; 
-    width: 150px;
-    font-size:medium;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 18%;
+    min-width: 65px;
+    font-size: medium;
+    align-self: end;
 }
 
 /*  ---------Game----------   */
@@ -66,8 +71,8 @@ div {
     display: flex;
     flex-flow: column;
     justify-content: center;
-    height: 70vh;
-    width: 70vw;
+    height: 129%;
+    width: 100%;
 }
 
 /*  Board   */
@@ -111,16 +116,16 @@ div {
 } 
 
 .hole.big{
-    width: 15vw;
-    height: 26vh;
+    width: 12vw;
+    height: 90%;
 }
 
 .hole.big.left{
-    margin-left: 3%;
+    margin-left: 2%;
 }
 
 .hole.big.right{
-    margin-right: 3%;
+    margin-right: 2%;
 }
 
 /*  Messages   */

@@ -17,42 +17,88 @@
         <form action="">
             <input class="input-text" type="email" id="email" name="email" placeholder="Email">
             <input class="input-text" type="password" id="password" name="password" placeholder="Password">
-            <input class="input-button" type="submit" value="Submit">
+            <input class="input-button" type="submit" value="submit">
         </form> 
     </div>
     <div class="user">
-        <div class="user-name">André Matilde</div>
         <form action="">
-            <input type="submit" value="Logout">
+            <div class="user-name">André Matilde</div>
+            <input class="input-button" type="submit" value="Logout">
         </form>
     </div>
 
 
     <div class="game">
         <div class="board">
-            <div class="hole big left"></div>
+            <div class="hole big left">
+                <div class="counter">6</div>
+                <div class="seeds-place"></div>
+            </div>
             <div class="gaming-holes">
                 <div class="up-holes">
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
                     
                 </div>
                 <div class="down-holes">
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
-                    <div class="hole"></div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
+                    <div class="hole">
+                        <div class="counter">6</div>
+                        <div class="seeds-place"></div>
+                    </div>
                 </div>
             </div>
-            <div class="hole big right"></div>
+            <div class="hole big right">
+                <div class="counter">6</div>
+                <div class="seeds-place"></div>
+            </div>
         </div>
-        <div class="messages">Message</div>
+        <div class="messages">
+            Message
+            <p>text</p>
+            <p>text</p>
+        </div>
     </div>
 
 
@@ -69,11 +115,14 @@
                 </label>
             </div>
 
-            <label for="holes">Number of holes </label>
-            <input type="number" id="holes" name="holes" value="6" max="30" min="1">
+            <label class="holes"  for="holes"> <span>Number of holes</span> 
+                <input type="number" id="holes" name="holes" value="6" max="30" min="1">
+            </label>
+            
 
-            <label for="seeds">Number of seeds </label>
-            <input type="number" id="seeds" name="seeds" value="4" max="50" min="1">
+            <label class="seeds" for="seeds"> <span>Number of seeds </span>
+                <input type="number" id="seeds" name="seeds" value="4" max="50" min="1">
+            </label>
 
             <div class="turn">
                 <label>
@@ -88,8 +137,8 @@
                 
             </div>
 
-            <input type="submit" value="Start">
-            <input type="reset" value="Reset">
+            <input class="input-button" type="submit" value="Start">
+            <input class="input-button" type="reset" value="Reset">
         </form> 
     </div>
 

@@ -59,10 +59,14 @@
     <div class="config">
         <form action="">
             <div class="game-mode">
-                <label for="single-player">SinglePlayer </label>
-                <input type="radio" id="single-player" name="game-mode" value="singleplayer" required>
-                <label for="game-mode">Multiplayer </label>
-                <input type="radio" id="multi-player" name="game-mode" value="multiplayer">
+                <label>
+                    <input type="radio" name="game-mode" value="singleplayer" required>
+                    <span>Single</span> 
+                </label>
+                <label>
+                    <input type="radio" name="game-mode" value="multiplayer">
+                    <span>Multi</span> 
+                </label>
             </div>
 
             <label for="holes">Number of holes </label>
@@ -72,10 +76,16 @@
             <input type="number" id="seeds" name="seeds" value="4" max="50" min="1">
 
             <div class="turn">
-                <label for="first">Start first </label>
-                <input type="radio" id="first" name="turn" value="first" required>
-                <label for="last">Start last </label>
-                <input type="radio" id="last" name="turn" value="last">
+                <label>
+                    <input type="radio" name="turn" value="first" required>
+                    <span>First</span> 
+                </label>
+                
+                <label>
+                    <input type="radio" id="last" name="turn" value="last">
+                    <span>Last</span> 
+                </label>
+                
             </div>
 
             <input type="submit" value="Start">

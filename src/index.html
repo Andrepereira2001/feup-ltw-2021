@@ -157,20 +157,20 @@
         </form> 
     </div>
 
-    <div class="result">Game Results
-        <div>Player 1: <span>0</span></div>
-        <div>Player 2: <span>0</span></div>
+    <div class="result">
+        <div class="player-1"> <span class="name"> Player 1</span> <span class="points">0</span></div>
+        <div class="player-2"> <span class="name">Player 2</span> <span class="points">0</span></div>
         <form action="">
-            <input type="submit" value="Quit">
+            <input  class="input-button" type="submit" value="Quit">
         </form>
-        <button class="show-instructions"><a href="#instructions">Instructions</a></button>
+        <a class="go-to-instructions" href="#instructions">Instructions</a>
     </div>
 
     <div class="learboard"></div>
     
 
     <!-- Slideshow container -->
-    <div class="slideshow-instructions">
+    <div id="instructions" class="slideshow-instructions">
 
         <!-- Full-width images with number and caption text -->
         <div class="rules fade">

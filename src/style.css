@@ -16,7 +16,7 @@ body {
     margin: 0px;
 }
 
-.user, .config{
+.user, .result{
     visibility: hidden;
 }
 
@@ -215,13 +215,18 @@ body {
     height: 100%;
     width: 100%;
     margin-top: 50px;
-    margin-left: 10px;
 }
 
 .config form, .result{
     display: flex;
     flex-flow: column;
     align-items: center;
+    width: 100%;
+}
+
+.config label, .config label span{
+    width: 100%;
+    text-align: center;
 }
 
 /* Hide radio buttons  */
@@ -273,11 +278,12 @@ body {
     border-width: 3px;
     border-color: #EF5C36;
     justify-content: center;
-    padding-left: 25px;
-    width: 30px;
+    padding-left: 15px;
+    width: 25%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     height: 95%;
+    text-align: center;
 }
 
 .config form .input-button, .result form .input-button {
@@ -304,6 +310,10 @@ body {
     text-decoration: none;
     text-align: center;
     min-width: 100px;
+}
+
+.result .player-2, .result .player-1{
+    width: 70%;
 }
 
 .result .player-2 {

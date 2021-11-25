@@ -134,8 +134,9 @@ body {
     display: flex;
     border-radius: 15px;
     margin: 7px;
-    width: 23%;
+    width: 50%;
     height: 80%;
+    align-items: center;
 } 
 
 .up-holes .hole, .hole.big.left{
@@ -153,7 +154,6 @@ body {
     width: 100%;
     justify-content: center;
     align-items: center;
-    text-align: center;
     font-weight: bold;
     font-size: x-large;
 }
@@ -168,7 +168,7 @@ body {
 }
 
 .hole.big{
-    width: 15vw;
+    width: 20%;
     height: 90%;
 }
 

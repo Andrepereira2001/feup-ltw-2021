@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="script/utils/instructionSlides.js" defer> </script>
+    <script type="module" src="script/game/seed.js" defer> </script>
+    <script type="module" src="script/game/hole.js" defer> </script>
+    <script type="module" src="script/game/board.js" defer></script>
+    <script type="module" src="script/game/game.js" defer></script>
+
     <title>Mangala</title>
 
 </head>
@@ -131,12 +138,12 @@
             </div>
 
             <label class="holes"  for="holes"> <span>Number of holes</span> 
-                <input type="number" id="holes" name="holes" value="6" max="30" min="1">
+                <input type="number" id="holes-input" name="holes" value="6" max="30" min="1">
             </label>
             
 
             <label class="seeds" for="seeds"> <span>Number of seeds </span>
-                <input type="number" id="seeds" name="seeds" value="4" max="50" min="1">
+                <input type="number" id="seeds-input" name="seeds" value="4" max="50" min="1">
             </label>
 
             <div class="turn">
@@ -231,36 +238,9 @@
 
     </div>
 
-    <br>
-
-    <script>
-        var slideIndex = 1;
-        showSlides(slideIndex);
-        
-        function plusSlides(n) {
-        showSlides(slideIndex += n);
-        }
-        
-        function currentSlide(n) {
-        showSlides(slideIndex = n);
-        }
-        
-        function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("rules");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}    
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";  
-        dots[slideIndex-1].className += " active";
-        }
-    </script>
+    <footer>
+        <h4>Copyright &#169; 2021 LTW - André Pereira & Matilde Oliveira - All Rights Reserved</h4>
+    </footer>
 
 </body>
 </html>

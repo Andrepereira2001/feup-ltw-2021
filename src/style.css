@@ -188,8 +188,6 @@ body {
     border-radius: 3vw;
     border: 0.1vw outset #333433;
     box-shadow: 0.2vw 0.3vw 1vw #636161;
-    left: var(--left);
-    top: var(--top);
 }
 
 /*  Messages   */

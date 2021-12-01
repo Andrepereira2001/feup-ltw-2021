@@ -17,6 +17,16 @@ class Hole {
     get nSeeds() {
         return this.seeds.length();
     }
+
+    removeSeeds() {
+        const seedsToRemove = this.seeds;
+        this.seeds=[];
+        return seedsToRemove;
+    }
+
+    addSeed(seed) {
+        this.seeds.push(seed);
+    }
      
 }
 

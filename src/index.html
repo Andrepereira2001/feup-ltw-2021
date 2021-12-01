@@ -7,112 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="script/utils/instructionSlides.js" defer> </script>
-    <script type="module" src="script/game/seed.js" defer> </script>
-    <script type="module" src="script/game/hole.js" defer> </script>
-    <script type="module" src="script/game/board.js" defer></script>
-    <script type="module" src="script/game/game.js" defer></script>
+    <script type="module" src="./script/game/game.js" defer></script>
+    <script type="module" src="./script/game/model/seed.js" defer> </script>
+    <script type="module" src="./script/game/model/hole.js" defer> </script>
+    <script type="module" src="./script/game/model/board.js" defer></script>
+    <script type="module" src="./script/game/display.js" defer></script>
 
     <title>Mangala</title>
 
 </head>
 <body>
-    <div class="logo">
+    <section class="logo">
         <img alt="Logo" src=".\images\logo.png">
-    </div>
+    </section>
 
-    <div class="login">
+    <section class="login">
         <form action="">
             <input class="input-text" type="email" id="email" name="email" placeholder="Email">
             <input class="input-text" type="password" id="password" name="password" placeholder="Password">
             <input class="input-button" type="submit" value="submit">
         </form> 
-    </div>
-    <div class="user">
+    </section>
+    <section class="user">
         <form action="">
             <div class="user-name">André Matilde</div>
             <input class="input-button" type="submit" value="Logout">
         </form>
-    </div>
+    </section>
 
 
-    <div class="game">
+    <section class="game">
         <div class="board">
             <div class="hole big left">
-                <div class="counter">6</div>
+                <div class="counter">0</div>
                 <div class="seeds-place"></div>
             </div>
             <div class="gaming-holes">
                 <div class="up-holes">
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place">
-                            <div class="seed" style="--top: 30%;--left: 20%;"></div>
-                            <div class="seed" style="--top: 20%;--left: 50%;"></div>
-                            <div class="seed" style="--top: 60%;--left: 60%;"></div>
-                            <div class="seed" style="--top: 70%;--left: 30%;"></div>
-                        </div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place">
-                            <div class="seed" style="--top: 30%;--left: 20%;"></div>
-                            <div class="seed" style="--top: 0%;--left: 65%;"></div>
-                            <div class="seed" style="--top: 20%;--left: 20%;"></div>
-                            <div class="seed" style="--top: 70%;--left: 30%;"></div>
-                        </div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place">
-                            <div class="seed" style="--top: 60%;--left: 30%;"></div>
-                            <div class="seed" style="--top: 20%;--left: 50%;"></div>
-                            <div class="seed" style="--top: 70%;--left: 20%;"></div>
-                            <div class="seed" style="--top: 70%;--left: 30%;"></div>
-                        </div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    
                 </div>
                 <div class="down-holes">
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
-                    <div class="hole">
-                        <div class="counter">6</div>
-                        <div class="seeds-place"></div>
-                    </div>
                 </div>
             </div>
             <div class="hole big right">
-                <div class="counter">6</div>
+                <div class="counter">0</div>
                 <div class="seeds-place"></div>
             </div>
         </div>
@@ -121,10 +58,10 @@
             <p>text</p>
             <p>text</p>
         </div>
-    </div>
+    </section>
 
 
-    <div class="config">
+    <section class="config">
         <form action="">
             <div class="game-mode">
                 <label>
@@ -162,22 +99,22 @@
             <input class="input-button" type="submit" value="Start">
             <input class="input-button" type="reset" value="Reset">
         </form> 
-    </div>
+    </section>
 
-    <div class="result">
+    <section class="result">
         <div class="player-1"> <span class="name"> Player 1</span> <span class="points">0</span></div>
         <div class="player-2"> <span class="name">Player 2</span> <span class="points">0</span></div>
         <form action="">
             <input  class="input-button" type="submit" value="Quit">
         </form>
         <a class="go-to-instructions" href="#instructions">Instructions</a>
-    </div>
+    </section>
 
-    <div class="learboard"></div>
+    <section class="learboard"></section>
     
 
     <!-- Slideshow container -->
-    <div id="instructions" class="slideshow-instructions">
+    <section id="instructions" class="slideshow-instructions">
 
         <!-- Full-width images with number and caption text -->
         <div class="rules fade">
@@ -236,7 +173,7 @@
             <span class="dot" onclick="currentSlide(4)"></span>
         </div>
 
-    </div>
+    </section>
 
     <footer>
         <h4>Copyright &#169; 2021 LTW - André Pereira & Matilde Oliveira - All Rights Reserved</h4>

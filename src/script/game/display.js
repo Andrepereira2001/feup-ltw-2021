@@ -66,6 +66,25 @@ class Display {
             oldHole = newHole.nextElementSibling;
         })
     }
+
+    replaceStorage(storage, htmlHole, game){
+        let counter = document.createElement("div");
+        counter.className='counter';
+        counter.innerText = storage.seeds.length;
+        
+        let seedPlace = document.createElement("div");
+        seedPlace.className='seeds-place';
+        
+        this.placeSeeds(storage.seeds,seedPlace);
+        
+
+        let oldCounter = htmlHole.firstElementChild;
+        console.log(oldCounter);
+        htmlHole.replaceChild(counter,oldCounter);
+
+        let oldSeedPlace = counter.nextElementSibling;
+        htmlHole.replaceChild(seedPlace,oldSeedPlace);
+    }
 }
 
 export default Display;

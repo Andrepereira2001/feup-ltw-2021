@@ -3,7 +3,7 @@ class Seed {
     //index -> index in the array from left to right (0-3)
     constructor(){
         this.positionx = Math.floor(Math.random() * 50);
-        this.positiony = Math.floor(Math.random() * 50);
+        this.positiony = Math.floor(Math.random() * 75);
     }
  
 }

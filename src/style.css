@@ -16,7 +16,7 @@ body {
     margin: 0px;
 }
 
-.user, .config{
+.user, .result{
     visibility: hidden;
 }
 

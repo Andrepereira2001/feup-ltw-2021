@@ -14,7 +14,7 @@ class Board {
             this.holes2.push(new Hole(i,2,this.nSeeds));
         }
         this.storage1 = new Hole(nHoles,1,0);
-        this.storage2 = new Hole(-1,2,0);; 
+        this.storage2 = new Hole(-1,2,0);
     }
 
     getHole(side, holeIndex) {
@@ -42,6 +42,10 @@ class Board {
                 return this.holes2[holeIndex - 1];
             }
         }
+    }
+
+    isStorage(hole){
+        return hole.index === -1 || hole.index === this.nHoles;
     }
         
 }

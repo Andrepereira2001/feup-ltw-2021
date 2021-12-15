@@ -2,29 +2,58 @@ import Board from "./model/board.js";
 import Display from "./display.js"
 
 class Game {
-    constructor(nHoles,nSeeds,firstPlayer,document){
+    constructor(nHoles = 6,nSeeds = 4,firstPlayer = 'first'){
         this.board = new Board(nHoles, nSeeds);
         this.display = new Display(document);
 
         (firstPlayer == 'first') ? this.nextPlayer = 1 : this.nextPlayer = 2;
-
+        
+        this.display.placeStorage(this.board.storage1,document.getElementsByClassName("hole big right")[0])
+        this.display.placeStorage(this.board.storage2,document.getElementsByClassName("hole big left")[0] )
         this.display.placeHoles(this.board.holes1, document.getElementsByClassName("down-holes")[0], this);
         this.display.placeHoles(this.board.holes2, document.getElementsByClassName("up-holes")[0], this);
     };
 
+    erase(){
+        this.display.erase();
+    }
+
     handleClick(side, holeIndex){
-        console.log(`player: ${this.nextPlayer}   ---   side:${side}`);
 
         if(this.nextPlayer === side){
-
             //verify if player should change
             if (this.spreadSeeds(side,holeIndex) === false){
-                console.log("changing side");
                 this.nextPlayer = (this.nextPlayer % 2) + 1; 
             }
         }
 
         this.drawBoard();
+
+        this.verifyEnd();
+    }
+
+    verifyEnd(){
+        let index = 0;
+        while(this.board.holes1[index].seeds.length === 0){
+            index++;
+            console.log("no seed");
+            if(index === this.board.holes1.length){
+                this.endGame();
+                return;
+            }
+        }
+        index = 0;
+        while(this.board.holes2[index].seeds.length === 0){
+            index++;
+            if(index === this.board.holes2.length){
+                this.endGame();
+                return;
+            }
+        }
+    }
+
+    endGame(){
+        console.log("GAME HAS ENDED");
     }
     
 
@@ -32,8 +61,11 @@ class Game {
         this.display.replaceHoles(this.board.holes1, document.getElementsByClassName("down-holes")[0], this);
         this.display.replaceHoles(this.board.holes2, document.getElementsByClassName("up-holes")[0], this);
         
-        this.display.replaceStorage(this.board.storage1,document.getElementsByClassName("hole big right")[0], this);
-        this.display.replaceStorage(this.board.storage2,document.getElementsByClassName("hole big left")[0], this);
+        this.display.replaceStorage(this.board.storage1,document.getElementsByClassName("hole big right")[0]);
+        this.display.replaceStorage(this.board.storage2,document.getElementsByClassName("hole big left")[0]);
+
+        this.display.resultDisplay(this.board.storage1, document.querySelector(".player-1 .points"));
+        this.display.resultDisplay(this.board.storage2, document.querySelector(".player-2 .points"));
     }
 
     //returns true if the player can play again
@@ -80,12 +112,5 @@ class Game {
     }
 }
 
-window.onload = () => {
-    const holesInput = document.getElementById('holes-input');
-    const seedsInput = document.getElementById('seeds-input');
-    const playerFirstTurn = document.querySelector('input[name="turn"]:checked');
-
-    new Game(holesInput.value,seedsInput.value, playerFirstTurn.value, document);
-}
-
+export default Game;
 

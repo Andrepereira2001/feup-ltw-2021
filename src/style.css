@@ -14,6 +14,8 @@ body {
     background-color: #333433;
     color: white;
     margin: 0px;
+    font-weight: normal;
+    font-size: 25px;
 }
 
 .user, .result{
@@ -65,10 +67,10 @@ body {
     color: white; 
     width: 10%;
     min-width: 65px;
-    font-size: medium;
     align-self: end;
     margin-bottom: 5px;
     border-radius: 6px;
+    font-size: 25px;
 }
 
 .user form {
@@ -282,22 +284,21 @@ body {
     text-align: center;
 }
 
-.config form .input-button, .result form .input-button {
+.config form .input-button, .result form .input-button, .config form .start-button, .result form .quit-button {
     background-color: #EF5C36;
     color: white; 
     width: 10%;
     min-width: 65px;
-    font-size: medium;
     align-self: center;
     border-radius: 6px;
     margin-bottom: 15px;
+    font-size: 25px;
 }
 
 .go-to-instructions {
     background-color: #EF5C36;
     color: white; 
     width: 10%;
-    font-size: medium;
     align-self: center;
     border-radius: 6px;
     margin-bottom: 15px;

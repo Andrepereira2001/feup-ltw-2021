@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="script/utils/instructionSlides.js" defer> </script>
+    <script src="./script/utils/instructionSlides.js" defer> </script>
     <script type="module" src="./script/game/game.js" defer></script>
     <script type="module" src="./script/game/model/seed.js" defer> </script>
     <script type="module" src="./script/game/model/hole.js" defer> </script>
     <script type="module" src="./script/game/model/board.js" defer></script>
     <script type="module" src="./script/game/display.js" defer></script>
+    <script type="module" src="./script/utils/buttonsHandlers.js" defer></script>
 
     <title>Mangala</title>
 
@@ -39,8 +40,6 @@
     <section class="game">
         <div class="board">
             <div class="hole big left">
-                <div class="counter">0</div>
-                <div class="seeds-place"></div>
             </div>
             <div class="gaming-holes">
                 <div class="up-holes">
@@ -49,8 +48,6 @@
                 </div>
             </div>
             <div class="hole big right">
-                <div class="counter">0</div>
-                <div class="seeds-place"></div>
             </div>
         </div>
         <div class="messages">
@@ -65,7 +62,7 @@
         <form action="">
             <div class="game-mode">
                 <label>
-                    <input type="radio" name="game-mode" value="singleplayer" required>
+                    <input type="radio" name="game-mode" value="singleplayer" required checked>
                     <span>Single</span> 
                 </label>
                 <label>
@@ -96,8 +93,9 @@
                 
             </div>
 
-            <input class="input-button" type="submit" value="Start">
+            <input class="start-button" type="submit" value="Start">
             <input class="input-button" type="reset" value="Reset">
+            <a class="go-to-instructions" href="#instructions">Instructions</a>
         </form> 
     </section>
 
@@ -105,7 +103,7 @@
         <div class="player-1"> <span class="name"> Player 1</span> <span class="points">0</span></div>
         <div class="player-2"> <span class="name">Player 2</span> <span class="points">0</span></div>
         <form action="">
-            <input  class="input-button" type="submit" value="Quit">
+            <input  class="quit-button" type="submit" value="Quit">
         </form>
         <a class="go-to-instructions" href="#instructions">Instructions</a>
     </section>

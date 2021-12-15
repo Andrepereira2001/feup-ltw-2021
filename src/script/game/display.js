@@ -14,6 +14,10 @@ class Display {
     }
     
     placeHoles(holes, htmlHole, game){
+        while (htmlHole.firstChild) {
+            htmlHole.removeChild(htmlHole.lastChild);
+        }
+
         holes.map((val) => {
             let hole = document.createElement("div");
             hole.className='hole';
@@ -67,7 +71,25 @@ class Display {
         })
     }
 
-    replaceStorage(storage, htmlHole, game){
+    placeStorage(storage, htmlHole){
+        while (htmlHole.firstChild) {
+            htmlHole.removeChild(htmlHole.lastChild);
+        }
+
+        let counter = document.createElement("div");
+        counter.className='counter';
+        counter.innerText = storage.seeds.length;
+        
+        let seedPlace = document.createElement("div");
+        seedPlace.className='seeds-place';
+        
+        this.placeSeeds(storage.seeds,seedPlace);
+        
+        htmlHole.appendChild(counter);
+        htmlHole.appendChild(seedPlace);
+    }
+
+    replaceStorage(storage, htmlHole){
         let counter = document.createElement("div");
         counter.className='counter';
         counter.innerText = storage.seeds.length;
@@ -84,6 +106,30 @@ class Display {
 
         let oldSeedPlace = counter.nextElementSibling;
         htmlHole.replaceChild(seedPlace,oldSeedPlace);
+    }
+
+    eraseHoles(htmlHole){
+        while (htmlHole.firstChild) {
+            htmlHole.removeChild(htmlHole.lastChild);
+        }
+    }
+
+    resultDisplay(storage , htmlResult){
+        htmlResult.innerText = storage.seeds.length;
+    }
+
+    erasePoints(htmlResult){
+        htmlResult.innerText = 0;
+    }
+
+    erase(){
+        this.eraseHoles(document.getElementsByClassName("hole big right")[0]);
+        this.eraseHoles(document.getElementsByClassName("hole big left")[0]);
+        this.eraseHoles(document.getElementsByClassName("down-holes")[0]);
+        this.eraseHoles(document.getElementsByClassName("up-holes")[0]);
+
+        this.erasePoints(document.querySelector(".player-1 .points"));
+        this.erasePoints(document.querySelector(".player-2 .points"));
     }
 }
 

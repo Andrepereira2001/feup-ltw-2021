@@ -27,23 +27,23 @@ class Game {
             }
         }
 
-        this.drawBoard();
-
         this.verifyEnd();
+        
+        this.drawBoard();
     }
 
     verifyEnd(){
         let index = 0;
-        while(this.board.holes1[index].seeds.length === 0){
+        while(this.board.holes1[index].seeds.length === 0 && this.nextPlayer === 1){
             index++;
-            console.log("no seed");
             if(index === this.board.holes1.length){
                 this.endGame();
                 return;
             }
         }
+
         index = 0;
-        while(this.board.holes2[index].seeds.length === 0){
+        while(this.board.holes2[index].seeds.length === 0 && this.nextPlayer === 2){
             index++;
             if(index === this.board.holes2.length){
                 this.endGame();
@@ -53,7 +53,15 @@ class Game {
     }
 
     endGame(){
-        console.log("GAME HAS ENDED");
+        for(let i = 0; i < this.board.holes1.length; i++){
+            const seeds1 = this.board.holes1[i].removeSeeds();
+            this.board.storage1.seeds = this.board.storage1.seeds.concat(seeds1);
+
+            const seeds2 = this.board.holes2[i].removeSeeds();
+            this.board.storage2.seeds = this.board.storage2.seeds.concat(seeds2);
+        }
+
+        this.display.endGame('VICTORY',this.board.storage1.seeds.length,this.board.storage2.seeds.length);
     }
     
 

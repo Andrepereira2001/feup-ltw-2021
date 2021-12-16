@@ -131,6 +131,20 @@ class Display {
         this.erasePoints(document.querySelector(".player-1 .points"));
         this.erasePoints(document.querySelector(".player-2 .points"));
     }
+
+    endGame(text,seedsPlayer1,seedsPlayer2){
+        const title = document.querySelector(".popup h2");
+        title.innerHTML = text;
+
+        const player1Score = document.querySelector(".popup .scores .value-1");
+        const player2Score = document.querySelector(".popup .scores .value-2");
+
+        player1Score.innerHTML = seedsPlayer1;
+        player2Score.innerHTML = seedsPlayer2;
+
+        const popup = this.document.querySelector(".popup");
+        popup.style.display = "inline";
+    }
 }
 
 export default Display;

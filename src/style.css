@@ -1,10 +1,10 @@
-@import url(https://allfont.net/allfont.css?fonts=league-gothic); 
+@import url("https://use.typekit.net/vet2zii.css");
 
 
 /*  ---------Structure----------   */
 
 * {
-    font-family: 'League Gothic', arial;
+    font-family: league-gothic, sans-serif;
 }
 
 body {
@@ -439,7 +439,7 @@ body {
 
 /* ---------Popup---------- */
 
-.popup.defeat{
+.popup{
     background:rgba(0,0,0,.4);
     cursor: pointer;
     display: none;
@@ -450,12 +450,12 @@ body {
     width: 100%;
     z-index: 10000;
 }
-.popup.defeat .helper{
+.popup .helper{
     display:inline-block;
     height:100%;
     vertical-align:middle;
 }
-.popup.defeat > div {
+.popup > div {
     background-color: #EF5C36;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
@@ -490,6 +490,36 @@ body {
     background-color: #868585;
 }
 
+.popup .container{
+    display: flex;
+    flex-flow: column;
+}
+
+.popup .container .player{
+    display: flex;
+    flex-flow: column;
+}
+
+.popup .container .scores{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.popup .container .player span{
+    margin: 10px;
+}
+
+.popup .restart-button{
+    font-size: 25px;
+    align-self: center;
+    color: white;
+    background-color: #333433;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
 /* ----------Footer---------------- */
 
 footer {
@@ -498,7 +528,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 15px;
+    margin: 0;
+    font-weight:lighter;
     border-top: 3px solid#EF5C36;
     background-color: #636161;
 }

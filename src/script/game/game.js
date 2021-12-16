@@ -12,23 +12,31 @@ class Game {
         this.display.placeStorage(this.board.storage2,document.getElementsByClassName("hole big left")[0] )
         this.display.placeHoles(this.board.holes1, document.getElementsByClassName("down-holes")[0], this);
         this.display.placeHoles(this.board.holes2, document.getElementsByClassName("up-holes")[0], this);
+
+        this.display.writeMessage(0,"Game has start!")
+        this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
     };
 
     erase(){
+        this.display.writeMessage(0,"Cleaning board.")
         this.display.erase();
     }
 
     handleClick(side, holeIndex){
-
         if(this.nextPlayer === side){
+            let capturedSeeds = this.board.storage1.seeds.length;
+            capturedSeeds += this.board.storage2.seeds.length;
             //verify if player should change
             if (this.spreadSeeds(side,holeIndex) === false){
                 this.nextPlayer = (this.nextPlayer % 2) + 1; 
             }
+
+            this.display.writeMessage(side, `Captured ${this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds} seeds.`)
         }
 
-        this.verifyEnd();
-        
+        if(!this.verifyEnd()){
+            this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
+        }
         this.drawBoard();
     }
 
@@ -38,7 +46,7 @@ class Game {
             index++;
             if(index === this.board.holes1.length){
                 this.endGame();
-                return;
+                return true;
             }
         }
 
@@ -47,9 +55,11 @@ class Game {
             index++;
             if(index === this.board.holes2.length){
                 this.endGame();
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     endGame(){
@@ -61,7 +71,17 @@ class Game {
             this.board.storage2.seeds = this.board.storage2.seeds.concat(seeds2);
         }
 
-        this.display.endGame('VICTORY',this.board.storage1.seeds.length,this.board.storage2.seeds.length);
+        if(this.board.storage1.seeds.length === this.board.storage2.seeds.length){
+            this.display.endGame('DRAW',this.board.storage1.seeds.length,this.board.storage2.seeds.length);
+            this.display.writeMessage(0, "Congratulations to both player you have draw.")
+        }else if (this.board.storage1.seeds.length > this.board.storage2.seeds.length){
+            this.display.endGame('VICTORY',this.board.storage1.seeds.length,this.board.storage2.seeds.length);
+            this.display.writeMessage(0, "Congratulations Player 1 you win.")
+        }
+        else {
+            this.display.endGame('DEFEAT',this.board.storage1.seeds.length,this.board.storage2.seeds.length);
+            this.display.writeMessage(0, "Better luck next time Player 1.")
+        }
     }
     
 

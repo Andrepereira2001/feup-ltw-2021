@@ -201,6 +201,19 @@ body {
     width: 55%;
     height: 150px;
     overflow-y: scroll;
+    line-height: 80%;
+}
+
+.messages .center {
+    text-align: center;
+}
+
+.messages .end {
+    text-align: end;
+}
+
+.messages .start {
+    text-align: start;
 }
 
 /*  ---------Config/Result----------   */
@@ -282,6 +295,7 @@ body {
     border-bottom-right-radius: 10px;
     height: 95%;
     text-align: center;
+    font-size: 25px 
 }
 
 .config form .input-button, .result form .input-button, .config form .start-button, .result form .quit-button {

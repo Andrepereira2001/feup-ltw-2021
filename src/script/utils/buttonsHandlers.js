@@ -63,16 +63,27 @@ function popupQuit(){
 }
 
 function popupRestartHandler(e) {
-    game.erase()
-    const popup = document.querySelector(".popup")
+    game.erase();
+    const popup = document.querySelector(".popup");
     popup.style.display = "none";
 
     startButtonHandler(e);
 }
 
 function popupRestart(){
-    const popupRestart = document.querySelector(".popup .restart-button")
+    const popupRestart = document.querySelector(".popup .restart-button");
     popupRestart.addEventListener('click', (e) => {popupRestartHandler(e)}, false);
+}
+
+function goToInstructionsHandler(e) {
+    e.preventDefault();
+    const instruction = document.getElementById("instructions");
+    /*instruction.style.display = "none";*/
+}
+
+function goToInstructions() {
+    const goToInstructions = document.querySelector(".go-to-instructions")
+    goToInstructions.addEventListener('click', (e) => {goToInstructionsHandler(e)}, false);
 }
 
 function loadButtons(){
@@ -80,6 +91,7 @@ function loadButtons(){
     quitButton();
     popupQuit();
     popupRestart();
+    goToInstructions();
 }
 
 

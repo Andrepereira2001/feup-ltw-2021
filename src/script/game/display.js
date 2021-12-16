@@ -108,9 +108,9 @@ class Display {
         htmlHole.replaceChild(seedPlace,oldSeedPlace);
     }
 
-    eraseHoles(htmlHole){
-        while (htmlHole.firstChild) {
-            htmlHole.removeChild(htmlHole.lastChild);
+    eraseContent(container){
+        while (container.firstChild) {
+            container.removeChild(container.lastChild);
         }
     }
 
@@ -123,13 +123,15 @@ class Display {
     }
 
     erase(){
-        this.eraseHoles(document.getElementsByClassName("hole big right")[0]);
-        this.eraseHoles(document.getElementsByClassName("hole big left")[0]);
-        this.eraseHoles(document.getElementsByClassName("down-holes")[0]);
-        this.eraseHoles(document.getElementsByClassName("up-holes")[0]);
+        this.eraseContent(document.getElementsByClassName("hole big right")[0]);
+        this.eraseContent(document.getElementsByClassName("hole big left")[0]);
+        this.eraseContent(document.getElementsByClassName("down-holes")[0]);
+        this.eraseContent(document.getElementsByClassName("up-holes")[0]);
 
         this.erasePoints(document.querySelector(".player-1 .points"));
         this.erasePoints(document.querySelector(".player-2 .points"));
+
+        this.eraseContent(document.querySelector(".messages"));
     }
 
     endGame(text,seedsPlayer1,seedsPlayer2){
@@ -144,6 +146,31 @@ class Display {
 
         const popup = this.document.querySelector(".popup");
         popup.style.display = "inline";
+    }
+
+    writeMessage(player, text){
+        const messages = document.querySelector(".game .messages");
+
+        const paragraph = document.createElement("p");
+        const node = document.createTextNode(text)
+        paragraph.appendChild(node);
+
+
+        switch(player){
+            case 0:
+                paragraph.className = "center";
+                break;
+            case 1:
+                paragraph.className = "start";
+                break;
+            case 2:
+                paragraph.className = "end";
+                break;
+        }
+
+        messages.appendChild(paragraph);
+
+        messages.scrollTop = messages.scrollHeight;
     }
 }
 

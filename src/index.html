@@ -76,6 +76,21 @@
                 <input type="number" id="seeds-input" name="seeds" value="4" max="50" min="1">
             </label>
 
+            <div class="single-difficulty">
+                <label>
+                    <input type="radio" name="single-difficulty" value="easy" required checked>
+                    <span>Easy</span> 
+                </label>
+                <label>
+                    <input type="radio" name="single-difficulty" value="medium">
+                    <span>Medium</span> 
+                </label>
+                <label>
+                    <input type="radio" name="single-difficulty" value="hard">
+                    <span>Hard</span> 
+                </label>
+            </div>
+
             <div class="turn">
                 <label>
                     <input type="radio" name="turn" value="first" required checked>
@@ -92,6 +107,7 @@
             <input class="start-button" type="submit" value="Start">
             <input class="input-button" type="reset" value="Reset">
             <a class="go-to-instructions" href="#instructions">Instructions</a>
+            <a class="go-to-leaderboard" href="#leaderboard">Leader Board</a>
         </form> 
     </section>
 

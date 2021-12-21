@@ -6,6 +6,23 @@ function loginButton(){
     
 }
 
+function singleButtonHandler(e){
+    const gameMode = document.querySelectorAll('input[name="game-mode"]');
+    const difficulty = document.getElementsByClassName("single-difficulty")[0];
+
+    if(gameMode[0].checked && !gameMode[1].checked){
+        difficulty.style.display = "block";
+    } else if(gameMode[1].checked && !gameMode[0].checked){
+        difficulty.style.display = "none";
+    }
+}
+
+function gameModeButton(){
+    const gameMode = document.querySelectorAll('input[name="game-mode"]');
+    gameMode[0].addEventListener('click', (e) => {singleButtonHandler(e)}, false);
+    gameMode[1].addEventListener('click', (e) => {singleButtonHandler(e)}, false);
+}   
+
 function startButtonHandler(e){
     e.preventDefault();
     const holesInput = document.getElementById('holes-input');
@@ -92,6 +109,7 @@ function loadButtons(){
     popupQuit();
     popupRestart();
     goToInstructions();
+    gameModeButton();
 }
 
 

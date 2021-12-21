@@ -5,6 +5,7 @@
 
 * {
     font-family: league-gothic, sans-serif;
+    font-weight: 100;
 }
 
 body {
@@ -242,14 +243,14 @@ body {
 }
 
 /* Hide radio buttons  */
-.game-mode [type = radio], .turn [type = radio]{ 
+.game-mode [type = radio], .turn [type = radio], .single-difficulty [type = radio]{ 
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.game-mode [type=radio] + span, .turn [type=radio] + span{
+.game-mode [type=radio] + span, .turn [type=radio] + span, .single-difficulty [type=radio] + span{
     cursor: pointer;
     background-color: white;
     color: black;
@@ -258,12 +259,16 @@ body {
     padding: 10px;
 }
 
-.game-mode [type=radio]:checked + span, .turn [type=radio]:checked + span{
+.game-mode [type=radio]:checked + span, .turn [type=radio]:checked + span, .single-difficulty [type=radio]:checked + span{
     background-color: #EF5C36;
 }
 
-.game-mode, .turn{
+.game-mode, .turn, .single-difficulty {
     margin-bottom: 25px;
+}
+
+.single-difficulty {
+    visibility: visible;
 }
 
 .holes, .seeds, .result .player-1, .result .player-2 {
@@ -310,6 +315,20 @@ body {
 }
 
 .go-to-instructions {
+    background-color: #EF5C36;
+    color: white; 
+    width: 10%;
+    align-self: center;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 2px;
+    border: 2px outset #6d6d6d;
+    text-decoration: none;
+    text-align: center;
+    min-width: 100px;
+}
+
+.go-to-leaderboard {
     background-color: #EF5C36;
     color: white; 
     width: 10%;

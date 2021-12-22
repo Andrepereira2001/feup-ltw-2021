@@ -11,15 +11,14 @@
 body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 5fr 2fr;
+    grid-template-rows: 1fr 6fr 70px;
     background-color: #333433;
     color: white;
     margin: 0px;
-    font-weight: normal;
     font-size: 25px;
 }
 
-.user, .result{
+.user, .result, .leaderboard, .instructions{
     visibility: hidden;
 }
 
@@ -83,9 +82,69 @@ body {
     height: 100%;
 }
 
+/*  ---------LeaderBoard----------   */
+
+.leaderboard{
+    grid-column: 1 / 5;
+    grid-row: 2 / 3;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-top: 3px solid #EF5C36;
+    border-right: 3px solid #EF5C36;
+    border-bottom: 3px solid #EF5C36;
+}
+
+.leaderboard h1 {
+    color: black;
+    font-weight: 1000;
+}
+
+.board-leaderboard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EF5C36;
+    flex-flow: column;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 10px;
+    height: 70%;
+    width: 70%;
+}
+
+.leaderboard-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    flex-flow: column;
+    width: 60%;
+}
+
+.leaderboard-table span{
+    width: 100px;
+    text-align: center;
+}
+
+.leaderboard .titles{
+    border-bottom: 2px solid black ;
+    margin-bottom: 20px;
+}
+
+.leaderboard .titles, .leaderboard .entries{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
 /*  ---------Game----------   */
 
-.game {
+.game{
     grid-column: 1 / 5;
     grid-row: 2 / 3;
     display: flex;
@@ -267,10 +326,6 @@ body {
     margin-bottom: 25px;
 }
 
-.single-difficulty {
-    visibility: visible;
-}
-
 .holes, .seeds, .result .player-1, .result .player-2 {
     display: flex;
     background-color: white;
@@ -314,7 +369,7 @@ body {
     font-size: 25px;
 }
 
-.go-to-instructions {
+.go-to-instructions, .go-to-leaderboard, .go-to-game {
     background-color: #EF5C36;
     color: white; 
     width: 10%;
@@ -326,21 +381,13 @@ body {
     text-decoration: none;
     text-align: center;
     min-width: 100px;
+    cursor: pointer;
 }
 
-.go-to-leaderboard {
-    background-color: #EF5C36;
-    color: white; 
-    width: 10%;
-    align-self: center;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    padding: 2px;
-    border: 2px outset #6d6d6d;
-    text-decoration: none;
-    text-align: center;
-    min-width: 100px;
+.go-to-game{
+    display: none;
 }
+
 
 .result .player-2, .result .player-1{
     width: 70%;
@@ -376,18 +423,37 @@ body {
 
 /*  ---------Instructions----------   */
 
+.instructions{
+    grid-column: 1 / 5;
+    grid-row: 2 / 3;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-top: 3px solid #EF5C36;
+    border-right: 3px solid #EF5C36;
+    border-bottom: 3px solid #EF5C36;
+}
+
+.instructions h3 {
+    color: black;
+}
+
 .slideshow-instructions {
-    grid-column: 1 / 7;
-    grid-row: 3/5;
+    background-color: #EF5C36;
+    border-radius: 10px;
     position: relative;
     display: flex;
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
     width: 70%;
-    height: 100%;
-    justify-self: center;
-    justify-content: space-between;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Next & previous buttons */
@@ -398,10 +464,9 @@ body {
     width: auto;
     margin-top: -22px;
     padding: 16px;
-    color: white;
+    color: black;
     font-weight: bold;
     font-size: 18px;
-    transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
@@ -427,6 +492,8 @@ body {
 /* Dots indicators */
 .dots {
     align-self: center;
+    position: absolute;
+    bottom: 10px;
 }
 
 .dot {
@@ -441,7 +508,7 @@ body {
 }
   
 .active, .dot:hover {
-    background-color: #EF5C36;
+    background-color: #000000;
 }
 
 /* Fading animation */
@@ -466,9 +533,6 @@ body {
     from {opacity: .4}
     to {opacity: 1}
 }
-
-/*  ---------LeaderBoard----------   */
-
 
 /* ---------Popup---------- */
 
@@ -557,7 +621,6 @@ body {
 
 footer {
     grid-column: 1 / 7;
-    grid-row: 5 / 6;
     display: flex;
     align-items: center;
     justify-content: center;

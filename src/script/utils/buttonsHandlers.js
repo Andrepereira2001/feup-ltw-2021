@@ -36,6 +36,7 @@ function startButtonHandler(e){
 
     result.style.visibility = "visible";
     config.style.visibility = "hidden";
+
 }
 
 function startButton(){
@@ -93,9 +94,21 @@ function popupRestart(){
 }
 
 function goToInstructionsHandler(e) {
-    e.preventDefault();
-    const instruction = document.getElementById("instructions");
-    /*instruction.style.display = "none";*/
+    const game = document.querySelector(".game");
+    const leaderboard = document.querySelector(".leaderboard");
+    const instructions = document.querySelector(".instructions");
+
+    const goToGame = document.querySelector(".go-to-game");
+    const goToLeaderboard = document.querySelector(".go-to-leaderboard");
+    const goToInstructions = document.querySelector(".go-to-instructions");
+
+    game.style.visibility = "hidden";
+    leaderboard.style.visibility = "hidden";
+    instructions.style.visibility = "visible";
+
+    goToLeaderboard.style.display = "block";
+    goToGame.style.display = "block";
+    goToInstructions.style.display = "none";
 }
 
 function goToInstructions() {
@@ -103,13 +116,61 @@ function goToInstructions() {
     goToInstructions.addEventListener('click', (e) => {goToInstructionsHandler(e)}, false);
 }
 
+function goToLeaderBoardHandler(e) {
+    const game = document.querySelector(".game");
+    const leaderboard = document.querySelector(".leaderboard");
+    const instructions = document.querySelector(".instructions");
+
+    const goToGame = document.querySelector(".go-to-game");
+    const goToLeaderboard = document.querySelector(".go-to-leaderboard");
+    const goToInstructions = document.querySelector(".go-to-instructions");
+
+    game.style.visibility = "hidden";
+    leaderboard.style.visibility = "visible";
+    instructions.style.visibility = "hidden";
+
+    goToLeaderboard.style.display = "none";
+    goToGame.style.display = "block";
+    goToInstructions.style.display = "block";
+}
+
+function goToLeaderBoard() {
+    const goToLeaderBoard = document.querySelector(".go-to-leaderboard")
+    goToLeaderBoard.addEventListener('click', (e) => {goToLeaderBoardHandler(e)}, false);
+}
+
+function goToGameHandler(e) {
+    const game = document.querySelector(".game");
+    const leaderboard = document.querySelector(".leaderboard");
+    const instructions = document.querySelector(".instructions");
+
+    const goToGame = document.querySelector(".go-to-game");
+    const goToLeaderboard = document.querySelector(".go-to-leaderboard");
+    const goToInstructions = document.querySelector(".go-to-instructions");
+
+    game.style.visibility = "visible";
+    leaderboard.style.visibility = "hidden";
+    instructions.style.visibility = "hidden";
+
+    goToLeaderboard.style.display = "block";
+    goToGame.style.display = "none";
+    goToInstructions.style.display = "block";
+}
+
+function goToGame() {
+    const goToGame = document.querySelector(".go-to-game")
+    goToGame.addEventListener('click', (e) => {goToGameHandler(e)}, false);
+}
+
 function loadButtons(){
     startButton();
     quitButton();
     popupQuit();
     popupRestart();
-    goToInstructions();
     gameModeButton();
+    goToInstructions();
+    goToLeaderBoard();
+    goToGame();
 }
 
 

@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="./script/utils/instructionSlides.js" defer> </script>
-    <script type="module" src="./script/game/game.js" ></script>
-    <script type="module" src="./script/game/model/seed.js" > </script>
-    <script type="module" src="./script/game/model/hole.js" > </script>
-    <script type="module" src="./script/game/model/board.js" ></script>
-    <script type="module" src="./script/game/display.js" ></script>
-    <script type="module" src="./script/utils/buttonsHandlers.js" ></script>
+    <script src="./script/utils/instructionSlides.js" defer>
+    </script>
+    <script type="module" src="./script/game/game.js"></script>
+    <script type="module" src="./script/game/model/seed.js"> </script>
+    <script type="module" src="./script/game/model/hole.js"> </script>
+    <script type="module" src="./script/game/model/board.js"></script>
+    <script type="module" src="./script/game/player/player.js"> </script>
+    <script type="module" src="./script/game/player/pc.js"></script>
+    <script type="module" src="./script/game/display.js"></script>
+    <script type="module" src="./script/utils/buttonsHandlers.js"></script>
 
     <title>Mangala</title>
 
 </head>
+
 <body>
     <section class="logo">
         <img alt="Logo" src="./images/logo.png">
@@ -27,10 +32,10 @@
             <input class="input-text" type="email" id="email" name="email" placeholder="Email">
             <input class="input-text" type="password" id="password" name="password" placeholder="Password">
             <input class="input-button" type="submit" value="Submit">
-        </form> 
+        </form>
     </section>
     <section class="user">
-        <form >
+        <form>
             <h2 class="user-name">André Matilde</h2>
             <input class="input-button" type="submit" value="Logout">
         </form>
@@ -54,7 +59,7 @@
         <div class="board-leaderboard">
             <h1>LEADER BOARD</h1>
             <article class="leaderboard-table">
-                <div class="titles"> 
+                <div class="titles">
                     <span class="username">Username</span>
                     <span class="victories">Victories</span>
                     <span class="games-played">Games Played</span>
@@ -70,7 +75,7 @@
 
 
     <section class="config">
-        <form >
+        <form>
             <article class="game-mode">
                 <label>
                     <input type="radio" name="game-mode" value="singleplayer" required checked>
@@ -82,10 +87,10 @@
                 </label>
             </article>
 
-            <label class="holes"  for="holes-input"> <span>Number of holes</span> 
+            <label class="holes" for="holes-input"> <span>Number of holes</span> 
                 <input type="number" id="holes-input" name="holes" value="6" max="30" min="1">
             </label>
-            
+
             <label class="seeds" for="seeds-input"> <span>Number of seeds </span>
                 <input type="number" id="seeds-input" name="seeds" value="4" max="50" min="1">
             </label>
@@ -110,7 +115,7 @@
                     <input type="radio" name="turn" value="first" required checked>
                     <span>First</span> 
                 </label>
-                
+
                 <label>
                     <input type="radio" name="turn" value="last">
                     <span>Last</span> 
@@ -119,10 +124,10 @@
 
             <input class="start-button" type="submit" value="Start">
             <input class="input-button" type="reset" value="Reset">
-        </form> 
+        </form>
 
         <a class="go-to-instructions">Instructions</a>
-        <a class="go-to-leaderboard" > Leader Board </a>
+        <a class="go-to-leaderboard"> Leader Board </a>
         <a class="go-to-game">Game</a>
     </section>
 
@@ -131,20 +136,20 @@
             <span class="name"> Player 1</span>
             <span class="points">0</span>
         </div>
-        <div class="player-2"> 
+        <div class="player-2">
             <span class="name">Player 2</span>
             <span class="points">0</span>
         </div>
-        <form >
-            <input  class="quit-button" type="submit" value="Quit">
+        <form>
+            <input class="quit-button" type="submit" value="Quit">
         </form>
         <a class="go-to-instructions" href=".instructions">Instructions</a>
     </section>
 
-    
-    
+
+
     <!-- Slideshow container -->
-    <section class="instructions" >
+    <section class="instructions">
         <div class="slideshow-instructions">
             <!-- Full-width images with number and caption text -->
             <article class="rules fade">
@@ -156,28 +161,24 @@
                     <li>The six pits near you are your pits.</li>
                 </ul>
             </article>
-        
+
             <article class="rules fade">
                 <div class="rules-page">2 / 4</div>
                 <h3>Starting the Game</h3>
-                <p> On a turn, a player picks up all the seeds in one pit and “sows” them to the right, placing one
-                seed in each of the pits along the way. If you come to your store, then add a seed to your store
-                and continue. You may end up putting seeds in your opponent’s pits along the way. 
+                <p> On a turn, a player picks up all the seeds in one pit and “sows” them to the right, placing one seed in each of the pits along the way. If you come to your store, then add a seed to your store and continue. You may end up putting seeds
+                    in your opponent’s pits along the way.
                 </p>
-                <p> Play alternates back and forth, with opponents picking up the seeds in one of their pits and
-                distributing them one at a time into the pits on the right, beginning in the pit immediately to the
-                right.
+                <p> Play alternates back and forth, with opponents picking up the seeds in one of their pits and distributing them one at a time into the pits on the right, beginning in the pit immediately to the right.
                 </p>
             </article>
-        
+
             <article class="rules fade">
                 <div class="rules-page">3 / 4</div>
                 <h3>Special Rules</h3>
                 <ul>
                     <li>When the last seed in your hand lands in your store, take another turn.</li>
-                    <li>When the last seed in your hand lands in one of your own pits, if that pit had been empty you
-                        get to keep all of the seeds in your opponents pit on the opposite side. Put those captured seeds,
-                        as well as the last seed that you just played on your side, into the store. 
+                    <li>When the last seed in your hand lands in one of your own pits, if that pit had been empty you get to keep all of the seeds in your opponents pit on the opposite side. Put those captured seeds, as well as the last seed that you just
+                        played on your side, into the store.
                     </li>
                 </ul>
             </article>
@@ -185,18 +186,16 @@
             <article class="rules fade">
                 <div class="rules-page">4 / 4</div>
                 <h3>Ending the Game</h3>
-                <p> The game is over when one player’s pits are completely empty. The other player takes the seeds
-                    remaining in her pits and puts those seeds in her store. Count up the seeds. Whoever has the most
-                    seeds wins.
+                <p> The game is over when one player’s pits are completely empty. The other player takes the seeds remaining in her pits and puts those seeds in her store. Count up the seeds. Whoever has the most seeds wins.
                 </p>
             </article>
-        
+
             <!-- Next and previous buttons -->
             <a class="prev-arrow" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next-arrow" onclick="plusSlides(1)">&#10095;</a>
 
             <!-- The dots/circles -->
-            <div class = "dots">
+            <div class="dots">
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
@@ -222,7 +221,7 @@
                         <span class="value-2">0</span>
                     </article>
                 </div>
-                <input  class="restart-button" type="submit" value="Restart">
+                <input class="restart-button" type="submit" value="Restart">
             </div>
         </div>
     </section>
@@ -232,4 +231,5 @@
     </footer>
 
 </body>
+
 </html>

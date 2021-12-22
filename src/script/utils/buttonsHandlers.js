@@ -2,34 +2,41 @@ import Game from "../game/game.js";
 
 let game = null;
 
-function loginButton(){
-    
+function loginButton() {
+
 }
 
-function singleButtonHandler(e){
+/*------------GAME MODE Radio Button---------------*/
+
+function singleButtonHandler(e) {
     const gameMode = document.querySelectorAll('input[name="game-mode"]');
     const difficulty = document.getElementsByClassName("single-difficulty")[0];
 
-    if(gameMode[0].checked && !gameMode[1].checked){
+    if (gameMode[0].checked && !gameMode[1].checked) {
         difficulty.style.display = "block";
-    } else if(gameMode[1].checked && !gameMode[0].checked){
+    } else if (gameMode[1].checked && !gameMode[0].checked) {
         difficulty.style.display = "none";
     }
 }
 
-function gameModeButton(){
+function gameModeButton() {
     const gameMode = document.querySelectorAll('input[name="game-mode"]');
-    gameMode[0].addEventListener('click', (e) => {singleButtonHandler(e)}, false);
-    gameMode[1].addEventListener('click', (e) => {singleButtonHandler(e)}, false);
-}   
+    gameMode[0].addEventListener('click', (e) => { singleButtonHandler(e) }, false);
+    gameMode[1].addEventListener('click', (e) => { singleButtonHandler(e) }, false);
+}
 
-function startButtonHandler(e){
+/*------------START Button---------------*/
+
+function startButtonHandler(e) {
     e.preventDefault();
     const holesInput = document.getElementById('holes-input');
     const seedsInput = document.getElementById('seeds-input');
     const playerFirstTurn = document.querySelector('input[name="turn"]:checked');
 
-    game = new Game(holesInput.value,seedsInput.value, playerFirstTurn.value);
+    const gameMode = document.querySelector('input[name="game-mode"]:checked');
+    const difficulty = document.querySelector('input[name="single-difficulty"]:checked');
+
+    game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value, gameMode.value, difficulty.value);
 
     const result = document.querySelector(".result");
     const config = document.querySelector(".config");
@@ -39,14 +46,16 @@ function startButtonHandler(e){
 
 }
 
-function startButton(){
+function startButton() {
     const startButton = document.getElementsByClassName("start-button")[0];
-    startButton.addEventListener('click', (e) => {startButtonHandler(e)}, false);
-}   
+    startButton.addEventListener('click', (e) => { startButtonHandler(e) }, false);
+}
 
-function quitButtonHandler(e){
+/*------------QUIT Button---------------*/
+
+function quitButtonHandler(e) {
     e.preventDefault();
-    game.erase();
+    game.leaveGame();
 
     const result = document.querySelector(".result");
     const config = document.querySelector(".config");
@@ -55,14 +64,16 @@ function quitButtonHandler(e){
     config.style.visibility = "visible";
 }
 
-function quitButton(){
+function quitButton() {
     const quitButton = document.getElementsByClassName("quit-button")[0];
-    quitButton.addEventListener('click', (e) => {quitButtonHandler(e)}, false);
+    quitButton.addEventListener('click', (e) => { quitButtonHandler(e) }, false);
 }
+
+/*------------End Game - Pop Up---------------*/
 
 function popupQuitHandler(e) {
     e.preventDefault();
-    game.erase()
+    game.leaveGame();
 
     const popup = document.querySelector(".popup")
     popup.style.display = "none";
@@ -74,24 +85,26 @@ function popupQuitHandler(e) {
     config.style.visibility = "visible";
 }
 
-function popupQuit(){
+function popupQuit() {
     const popupQuit = document.querySelector(".popup-close")
-    popupQuit.addEventListener('click', (e) => {popupQuitHandler(e)}, false);
+    popupQuit.addEventListener('click', (e) => { popupQuitHandler(e) }, false);
 
 }
 
 function popupRestartHandler(e) {
-    game.erase();
+    game.leaveGame();
     const popup = document.querySelector(".popup");
     popup.style.display = "none";
 
     startButtonHandler(e);
 }
 
-function popupRestart(){
+function popupRestart() {
     const popupRestart = document.querySelector(".popup .restart-button");
-    popupRestart.addEventListener('click', (e) => {popupRestartHandler(e)}, false);
+    popupRestart.addEventListener('click', (e) => { popupRestartHandler(e) }, false);
 }
+
+/*------------Instructions Button---------------*/
 
 function goToInstructionsHandler(e) {
     const game = document.querySelector(".game");
@@ -106,7 +119,7 @@ function goToInstructionsHandler(e) {
     game.style.visibility = "hidden";
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "visible";
-    
+
     form.style.display = "none";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "block";
@@ -115,8 +128,11 @@ function goToInstructionsHandler(e) {
 
 function goToInstructions() {
     const goToInstructions = document.querySelector(".go-to-instructions")
-    goToInstructions.addEventListener('click', (e) => {goToInstructionsHandler(e)}, false);
+    goToInstructions.addEventListener('click', (e) => { goToInstructionsHandler(e) }, false);
 }
+
+
+/*------------Leader Board Button---------------*/
 
 function goToLeaderBoardHandler(e) {
     const game = document.querySelector(".game");
@@ -140,8 +156,10 @@ function goToLeaderBoardHandler(e) {
 
 function goToLeaderBoard() {
     const goToLeaderBoard = document.querySelector(".go-to-leaderboard")
-    goToLeaderBoard.addEventListener('click', (e) => {goToLeaderBoardHandler(e)}, false);
+    goToLeaderBoard.addEventListener('click', (e) => { goToLeaderBoardHandler(e) }, false);
 }
+
+/*------------Game Button---------------*/
 
 function goToGameHandler(e) {
     const game = document.querySelector(".game");
@@ -165,10 +183,12 @@ function goToGameHandler(e) {
 
 function goToGame() {
     const goToGame = document.querySelector(".go-to-game")
-    goToGame.addEventListener('click', (e) => {goToGameHandler(e)}, false);
+    goToGame.addEventListener('click', (e) => { goToGameHandler(e) }, false);
 }
 
-function loadButtons(){
+/*------------Buttons Initialization---------------*/
+
+function loadButtons() {
     startButton();
     quitButton();
     popupQuit();
@@ -183,6 +203,5 @@ function loadButtons(){
 window.onload = () => {
     console.log("loading");
     loadButtons();
-    
-}
 
+}

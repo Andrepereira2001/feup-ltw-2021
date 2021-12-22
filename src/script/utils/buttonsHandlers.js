@@ -97,6 +97,7 @@ function goToInstructionsHandler(e) {
     const game = document.querySelector(".game");
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
+    const form = document.querySelector(".config form");
 
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
@@ -105,7 +106,8 @@ function goToInstructionsHandler(e) {
     game.style.visibility = "hidden";
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "visible";
-
+    
+    form.style.display = "none";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "block";
     goToInstructions.style.display = "none";
@@ -120,6 +122,7 @@ function goToLeaderBoardHandler(e) {
     const game = document.querySelector(".game");
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
+    const form = document.querySelector(".config form");
 
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
@@ -129,6 +132,7 @@ function goToLeaderBoardHandler(e) {
     leaderboard.style.visibility = "visible";
     instructions.style.visibility = "hidden";
 
+    form.style.display = "none";
     goToLeaderboard.style.display = "none";
     goToGame.style.display = "block";
     goToInstructions.style.display = "block";
@@ -143,6 +147,7 @@ function goToGameHandler(e) {
     const game = document.querySelector(".game");
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
+    const form = document.querySelector(".config form");
 
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
@@ -152,6 +157,7 @@ function goToGameHandler(e) {
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "hidden";
 
+    form.style.display = "flex";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "none";
     goToInstructions.style.display = "block";

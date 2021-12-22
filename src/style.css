@@ -111,7 +111,6 @@ body {
     background-color: #EF5C36;
     flex-flow: column;
     margin: auto;
-    margin-top: 50px;
     border-radius: 10px;
     height: 70%;
     width: 70%;
@@ -287,6 +286,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-flow: column;
 }
 
 .config form, .result{
@@ -448,8 +448,7 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: auto;
     width: 70%;
     height: 70%;
     align-items: center;

@@ -38,6 +38,8 @@ class Game {
             this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
         }
         this.drawBoard();
+
+        
     }
 
     verifyEnd(){

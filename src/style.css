@@ -18,7 +18,7 @@ body {
     font-size: 25px;
 }
 
-.user, .result, .leaderboard, .instructions{
+.login, .result, .leaderboard, .instructions{
     visibility: hidden;
 }
 
@@ -261,6 +261,7 @@ body {
     height: 150px;
     overflow-y: scroll;
     line-height: 80%;
+    border-radius: 5px;
 }
 
 .messages .center {

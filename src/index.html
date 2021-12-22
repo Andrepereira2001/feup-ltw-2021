@@ -7,31 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="./script/utils/instructionSlides.js" defer> </script>
-    <script type="module" src="./script/game/game.js" defer></script>
-    <script type="module" src="./script/game/model/seed.js" defer> </script>
-    <script type="module" src="./script/game/model/hole.js" defer> </script>
-    <script type="module" src="./script/game/model/board.js" defer></script>
-    <script type="module" src="./script/game/display.js" defer></script>
-    <script type="module" src="./script/utils/buttonsHandlers.js" defer></script>
+    <script type="module" src="./script/game/game.js" ></script>
+    <script type="module" src="./script/game/model/seed.js" > </script>
+    <script type="module" src="./script/game/model/hole.js" > </script>
+    <script type="module" src="./script/game/model/board.js" ></script>
+    <script type="module" src="./script/game/display.js" ></script>
+    <script type="module" src="./script/utils/buttonsHandlers.js" ></script>
 
     <title>Mangala</title>
 
 </head>
 <body>
     <section class="logo">
-        <img alt="Logo" src=".\images\logo.png">
+        <img alt="Logo" src="./images/logo.png">
     </section>
 
     <section class="login">
-        <form action="">
+        <form>
             <input class="input-text" type="email" id="email" name="email" placeholder="Email">
             <input class="input-text" type="password" id="password" name="password" placeholder="Password">
             <input class="input-button" type="submit" value="Submit">
         </form> 
     </section>
     <section class="user">
-        <form action="">
-            <div class="user-name">André Matilde</div>
+        <form >
+            <h2 class="user-name">André Matilde</h2>
             <input class="input-button" type="submit" value="Logout">
         </form>
     </section>
@@ -39,25 +39,21 @@
 
     <section class="game">
         <div class="board">
-            <div class="hole big left">
-            </div>
+            <div class="hole big left"></div>
             <div class="gaming-holes">
-                <div class="up-holes">
-                </div>
-                <div class="down-holes">
-                </div>
+                <div class="up-holes"></div>
+                <div class="down-holes"></div>
             </div>
-            <div class="hole big right">
-            </div>
+            <div class="hole big right"></div>
         </div>
-        <div class="messages"></div>
+        <aside class="messages"></aside>
     </section>
 
 
     <section class="leaderboard">
         <div class="board-leaderboard">
             <h1>LEADER BOARD</h1>
-            <div class="leaderboard-table">
+            <article class="leaderboard-table">
                 <div class="titles"> 
                     <span class="username">Username</span>
                     <span class="victories">Victories</span>
@@ -68,14 +64,14 @@
                     <span class="victories">20</span>
                     <span class="games-played">20</span>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
 
 
     <section class="config">
-        <form action="">
-            <div class="game-mode">
+        <form >
+            <article class="game-mode">
                 <label>
                     <input type="radio" name="game-mode" value="singleplayer" required checked>
                     <span>Single</span> 
@@ -84,18 +80,17 @@
                     <input type="radio" name="game-mode" value="multiplayer">
                     <span>Multi</span> 
                 </label>
-            </div>
+            </article>
 
-            <label class="holes"  for="holes"> <span>Number of holes</span> 
+            <label class="holes"  for="holes-input"> <span>Number of holes</span> 
                 <input type="number" id="holes-input" name="holes" value="6" max="30" min="1">
             </label>
             
-
-            <label class="seeds" for="seeds"> <span>Number of seeds </span>
+            <label class="seeds" for="seeds-input"> <span>Number of seeds </span>
                 <input type="number" id="seeds-input" name="seeds" value="4" max="50" min="1">
             </label>
 
-            <div class="single-difficulty">
+            <article class="single-difficulty">
                 <label>
                     <input type="radio" name="single-difficulty" value="easy" required checked>
                     <span>Easy</span> 
@@ -108,9 +103,9 @@
                     <input type="radio" name="single-difficulty" value="hard">
                     <span>Hard</span> 
                 </label>
-            </div>
+            </article>
 
-            <div class="turn">
+            <article class="turn">
                 <label>
                     <input type="radio" name="turn" value="first" required checked>
                     <span>First</span> 
@@ -120,8 +115,7 @@
                     <input type="radio" name="turn" value="last">
                     <span>Last</span> 
                 </label>
-                
-            </div>
+            </article>
 
             <input class="start-button" type="submit" value="Start">
             <input class="input-button" type="reset" value="Reset">
@@ -133,9 +127,15 @@
     </section>
 
     <section class="result">
-        <div class="player-1"> <span class="name"> Player 1</span> <span class="points">0</span></div>
-        <div class="player-2"> <span class="name">Player 2</span> <span class="points">0</span></div>
-        <form action="">
+        <div class="player-1">
+            <span class="name"> Player 1</span>
+            <span class="points">0</span>
+        </div>
+        <div class="player-2"> 
+            <span class="name">Player 2</span>
+            <span class="points">0</span>
+        </div>
+        <form >
             <input  class="quit-button" type="submit" value="Quit">
         </form>
         <a class="go-to-instructions" href=".instructions">Instructions</a>
@@ -143,12 +143,11 @@
 
     
     
-
     <!-- Slideshow container -->
     <section class="instructions" >
         <div class="slideshow-instructions">
             <!-- Full-width images with number and caption text -->
-            <div class="rules fade">
+            <article class="rules fade">
                 <div class="rules-page">1 / 4</div>
                 <h3>Basic Rules</h3>
                 <ul>
@@ -156,9 +155,9 @@
                     <li>The store on your right belongs to you. That is where you keep the seeds you win.</li>
                     <li>The six pits near you are your pits.</li>
                 </ul>
-            </div>
+            </article>
         
-            <div class="rules fade">
+            <article class="rules fade">
                 <div class="rules-page">2 / 4</div>
                 <h3>Starting the Game</h3>
                 <p> On a turn, a player picks up all the seeds in one pit and “sows” them to the right, placing one
@@ -169,9 +168,9 @@
                 distributing them one at a time into the pits on the right, beginning in the pit immediately to the
                 right.
                 </p>
-            </div>
+            </article>
         
-            <div class="rules fade">
+            <article class="rules fade">
                 <div class="rules-page">3 / 4</div>
                 <h3>Special Rules</h3>
                 <ul>
@@ -181,16 +180,16 @@
                         as well as the last seed that you just played on your side, into the store. 
                     </li>
                 </ul>
-            </div>
+            </article>
 
-            <div class="rules fade">
+            <article class="rules fade">
                 <div class="rules-page">4 / 4</div>
                 <h3>Ending the Game</h3>
                 <p> The game is over when one player’s pits are completely empty. The other player takes the seeds
                     remaining in her pits and puts those seeds in her store. Count up the seeds. Whoever has the most
                     seeds wins.
                 </p>
-            </div>
+            </article>
         
             <!-- Next and previous buttons -->
             <a class="prev-arrow" onclick="plusSlides(-1)">&#10094;</a>
@@ -205,7 +204,6 @@
             </div>
 
         </div>
-
     </section>
 
     <section class="popup">
@@ -215,14 +213,14 @@
             <div class="container">
                 <h2></h2>
                 <div class="scores">
-                    <div class="player">
+                    <article class="player">
                         <span>Player 1</span>
                         <span class="value-1">0</span>
-                    </div>
-                    <div class="player 2">
+                    </article>
+                    <article class="player">
                         <span>Player 2</span>
                         <span class="value-2">0</span>
-                    </div>
+                    </article>
                 </div>
                 <input  class="restart-button" type="submit" value="Restart">
             </div>

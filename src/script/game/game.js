@@ -45,7 +45,9 @@ class Game {
                 this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
             }
 
-            this.verifyEnd();
+            if( this.verifyEnd() ){
+                this.endGame();
+            }
 
             this.display.drawBoard(this);
         }
@@ -59,7 +61,6 @@ class Game {
         while (this.board.holes1[index].seeds.length === 0 && this.nextPlayer === 1) {
             index++;
             if (index === this.board.holes1.length) {
-                this.endGame();
                 return true;
             }
         }
@@ -68,7 +69,6 @@ class Game {
         while (this.board.holes2[index].seeds.length === 0 && this.nextPlayer === 2) {
             index++;
             if (index === this.board.holes2.length) {
-                this.endGame();
                 return true;
             }
         }

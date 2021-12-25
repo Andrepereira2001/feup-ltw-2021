@@ -2,9 +2,10 @@ class Player {
     constructor(board, side) {
         this.board = board;
         this.side = side;
+        this.observers = {};
     }
 
-    play(holeIndex) {
+    play() {
         console.log("play mau");
     }
 
@@ -15,7 +16,6 @@ class Player {
 
     //returns true if the player can play again
     spreadSeeds(side, holeIndex) {
-        console.log("side:", side, "-", holeIndex);
         let hole = this.board.getHole(side, holeIndex);
 
         if (hole.seeds.length === 0) {
@@ -57,6 +57,19 @@ class Player {
             }
         }
         return false;
+    }
+
+    addObserver(event, observer){
+        if(this.observers[event] === undefined){
+            this.observers[event] = [];
+        } 
+        this.observers[event].push(observer);
+    }
+
+    notify(event, capturedSeeds){
+        this.observers[event].map((observer) => { 
+            observer.writeMessage(this.side, `Captured ${capturedSeeds} seeds.`)
+        })
     }
 
 }

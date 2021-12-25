@@ -111,7 +111,7 @@ class Display {
         holes.map((val) => {
             hole.onclick = ((side, holeIndex) => {
                 return () => {
-                    game.handleClick.call(game, side, holeIndex);
+                    game.handleEvent.call(game, side, holeIndex);
                 }
             })(val.side, val.index);
 
@@ -188,6 +188,7 @@ class Display {
     /*------------Messages---------------*/
 
     writeMessage(player, text) {
+        
         const messages = document.querySelector(".game .messages");
 
         const paragraph = document.createElement("p");

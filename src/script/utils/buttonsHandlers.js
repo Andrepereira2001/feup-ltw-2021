@@ -37,6 +37,7 @@ function startButtonHandler(e) {
     const difficulty = document.querySelector('input[name="single-difficulty"]:checked');
 
     game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value, gameMode.value, difficulty.value);
+    game.start();
 
     const result = document.querySelector(".result");
     const config = document.querySelector(".config");

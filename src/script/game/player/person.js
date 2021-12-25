@@ -5,15 +5,22 @@ class Person extends Player {
         super(board, side);
     }
 
+    //returns true if the player can play again
     play(holeIndex) {
         if (holeIndex !== undefined) {
-            console.log("person playing");
-            return super.spreadSeeds(this.side, holeIndex);
+            let capturedSeeds = this.board.storage1.seeds.length;
+            capturedSeeds += this.board.storage2.seeds.length;
+
+            const keepTurn = super.spreadSeeds(this.side, holeIndex);
+
+            capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
+
+            super.notify('play',capturedSeeds);
+            
+            return keepTurn;
         }
-        return false;
+        return true;
     }
-
-
 }
 
 

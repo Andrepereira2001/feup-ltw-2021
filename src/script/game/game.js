@@ -8,15 +8,20 @@ class Game {
         this.board = new Board(nHoles, nSeeds);
         this.display = new Display(document);
         this.players = [];
+        this.loopingTimeout = null;
 
-        (firstPlayer == 'first') ? this.nextPlayer = 1: this.nextPlayer = 2;
+        (firstPlayer === 'first') ? this.nextPlayer = 1: this.nextPlayer = 2;
 
         if (gameMode === "singleplayer") {
             this.players[1] = new Person(this.board, 1);
             this.players[2] = new PC(this.board, 2);
+            this.players[1].addObserver('play',this.display);
+            this.players[2].addObserver('play',this.display);
         } else {
             this.players[1] = new Person(this.board, 1);
             this.players[2] = new Person(this.board, 2);
+            this.players[1].addObserver('play',this.display);
+            this.players[2].addObserver('play',this.display);
         }
 
         this.display.createBoard(this);
@@ -26,42 +31,24 @@ class Game {
     };
 
     /*------------Game Flow---------------*/
+    start(){
+        this.handleEvent();
 
+        this.loopingTimeout = setTimeout(() => {this.start()}, 5000);
+    }
 
-    handleClick(side, holeIndex) {
-        if (this.nextPlayer === side) {
-
-            let capturedSeeds = this.board.storage1.seeds.length;
-            capturedSeeds += this.board.storage2.seeds.length;
+    handleEvent(side, holeIndex) {
+        if(side === this.nextPlayer || side === undefined){
             //verify if player should change
             if (this.players[this.nextPlayer].play(holeIndex) === false) {
                 this.nextPlayer = (this.nextPlayer % 2) + 1;
+                this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
             }
 
-            this.display.writeMessage(side, `Captured ${this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds} seeds.`)
-        }
+            this.verifyEnd();
 
-        this.gameFlow();
-
-    }
-
-    gameFlow() {
-        if (!this.verifyEnd()) {
-            this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
-        }
-
-        this.display.drawBoard(this);
-
-        console.log("next to play", this.nextPlayer);
-
-        if (this.nextPlayer === 2) {
-            while (this.players[this.nextPlayer].play()) {
-                this.display.drawBoard(this);
-            }
-            this.nextPlayer = (this.nextPlayer % 2) + 1;
             this.display.drawBoard(this);
         }
-
     }
 
 
@@ -108,9 +95,11 @@ class Game {
             this.display.endGame('DEFEAT', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
             this.display.writeMessage(0, "Better luck next time Player 1.")
         }
+        clearTimeout(this.loopingTimeout);
     }
 
     leaveGame() {
+        clearTimeout(this.loopingTimeout);
         this.display.erase();
     }
 

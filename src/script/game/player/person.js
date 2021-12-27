@@ -11,12 +11,12 @@ class Person extends Player {
             let capturedSeeds = this.board.storage1.seeds.length;
             capturedSeeds += this.board.storage2.seeds.length;
 
-            const keepTurn = super.spreadSeeds(this.side, holeIndex);
+            const keepTurn = this.board.spreadSeeds(this.side, holeIndex);
 
             capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
 
-            super.notify('play',capturedSeeds);
-            
+            super.notify('play', capturedSeeds);
+
             return keepTurn;
         }
         return true;

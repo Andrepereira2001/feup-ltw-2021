@@ -14,14 +14,14 @@ class Game {
 
         if (gameMode === "singleplayer") {
             this.players[1] = new Person(this.board, 1);
-            this.players[2] = new PC(this.board, 2);
-            this.players[1].addObserver('play',this.display);
-            this.players[2].addObserver('play',this.display);
+            this.players[2] = new PC(this.board, 2, difficulty);
+            this.players[1].addObserver('play', this.display);
+            this.players[2].addObserver('play', this.display);
         } else {
             this.players[1] = new Person(this.board, 1);
             this.players[2] = new Person(this.board, 2);
-            this.players[1].addObserver('play',this.display);
-            this.players[2].addObserver('play',this.display);
+            this.players[1].addObserver('play', this.display);
+            this.players[2].addObserver('play', this.display);
         }
 
         this.display.createBoard(this);
@@ -31,21 +31,21 @@ class Game {
     };
 
     /*------------Game Flow---------------*/
-    start(){
+    start() {
         this.handleEvent();
 
-        this.loopingTimeout = setTimeout(() => {this.start()}, 5000);
+        this.loopingTimeout = setTimeout(() => { this.start() }, 1000);
     }
 
     handleEvent(side, holeIndex) {
-        if(side === this.nextPlayer || side === undefined){
+        if (side === this.nextPlayer || side === undefined) {
             //verify if player should change
             if (this.players[this.nextPlayer].play(holeIndex) === false) {
                 this.nextPlayer = (this.nextPlayer % 2) + 1;
                 this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
             }
 
-            if( this.verifyEnd() ){
+            if (this.verifyEnd()) {
                 this.endGame();
             }
 

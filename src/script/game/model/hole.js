@@ -15,7 +15,7 @@ class Hole {
     }
 
     get nSeeds() {
-        return this.seeds.length();
+        return this.seeds.length;
     }
 
     removeSeeds() {
@@ -26,6 +26,21 @@ class Hole {
 
     addSeed(seed) {
         this.seeds.push(seed);
+    }
+
+    setHole(hole) {
+        this.index = hole.index;
+        this.side = hole.side;
+        this.seeds = new Array();
+        for (let i = 0; i < hole.seeds.length; i++) {
+            this.seeds.push(hole.seeds[i].clone());
+        }
+    }
+
+    clone() {
+        let hole = new Hole();
+        hole.setHole(this);
+        return hole;
     }
 
 }

@@ -4,20 +4,25 @@ class PC extends Player {
     constructor(board, side, difficulty) {
         super(board, side);
         this.difficulty = difficulty;
-        console.log(difficulty);
+        this.interruptsToPlay = 3;
     }
 
     play(holeIndex) {
         if (holeIndex === undefined) {
-            let capturedSeeds = this.board.storage1.seeds.length;
-            capturedSeeds += this.board.storage2.seeds.length;
+            if (this.interruptsToPlay === 0) {
+                this.interruptsToPlay = 3;
+                let capturedSeeds = this.board.storage1.seeds.length;
+                capturedSeeds += this.board.storage2.seeds.length;
 
-            const keepTurn = this.board.spreadSeeds(this.side, this.getBestHole(this.difficulty));
+                const keepTurn = this.board.spreadSeeds(this.side, this.getBestHole(this.difficulty));
 
-            capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
-            super.notify('play', capturedSeeds);
+                capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
+                super.notify('play', capturedSeeds);
 
-            return keepTurn;
+                return keepTurn;
+            } else {
+                this.interruptsToPlay = this.interruptsToPlay - 1;
+            }
         }
         return true;
     }

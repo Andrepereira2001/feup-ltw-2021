@@ -11,7 +11,6 @@ function register(username, password, callback) {
             })
         })
         .then((res) => {
-            console.log(res.status);
             if (res.status === 200) {
                 callback(username, password);
             } else {

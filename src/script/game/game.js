@@ -39,10 +39,12 @@ class Game {
     };
 
     setPlayer1(player) {
-        this.players[1] = player;
-        this.players[1].setBoard(this.board);
-        this.players[1].setSide(1);
-        this.players[1].addObserver('play', this.display);
+        if (player !== null) {
+            this.players[1] = player;
+            this.players[1].setBoard(this.board);
+            this.players[1].setSide(1);
+            this.players[1].addObserver('play', this.display);
+        }
     }
 
     /*------------Game Flow---------------*/

@@ -60,9 +60,7 @@ class Display {
     /*------------Holes Display---------------*/
 
     placeHoles(holes, htmlHole) {
-        while (htmlHole.firstChild) {
-            htmlHole.removeChild(htmlHole.lastChild);
-        }
+        this.eraseContent(htmlHole);
 
         holes.map((val) => {
             let hole = document.createElement("div");
@@ -122,7 +120,7 @@ class Display {
     /*------------Storage Display---------------*/
 
     placeStorage(storage, htmlHole) {
-        eraseContent(htmlHole)
+        this.eraseContent(htmlHole)
 
         let counter = document.createElement("div");
         counter.className = 'counter';

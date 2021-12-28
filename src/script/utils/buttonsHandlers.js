@@ -11,6 +11,9 @@ let player1 = null;
 function logoutButtonHandler(e) {
     e.preventDefault();
     player1 = null;
+    if (game !== null) {
+        quitButtonHandler(e);
+    }
 
     const user = document.querySelector('.user');
     const login = document.querySelector('.login');
@@ -86,6 +89,7 @@ function startButtonHandler(e) {
     const difficulty = document.querySelector('input[name="single-difficulty"]:checked');
 
     game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value, gameMode.value, difficulty.value);
+    game.setPlayer1(player1);
     game.start();
 
     const result = document.querySelector(".result");
@@ -208,7 +212,6 @@ function goToLeaderBoardHandler(e) {
 
 function goToleaderboardCallBack(list) {
     const listLines = JSON.parse(list).ranking;
-    console.log(listLines);
 
     const leaderboardTable = document.querySelector(".leaderboard .leaderboard-table");
 

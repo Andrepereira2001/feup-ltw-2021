@@ -1,9 +1,58 @@
 import Game from "../game/game.js";
+import { register, ranking } from "./requests.js";
+import AuthPerson from "../game/player/authPerson.js";
 
 let game = null;
 
-function loginButton() {
+let player1 = null;
 
+/*------------Logout Form---------------*/
+
+function logoutButtonHandler(e) {
+    e.preventDefault();
+    player1 = null;
+
+    const user = document.querySelector('.user');
+    const login = document.querySelector('.login');
+
+    user.style.visibility = 'hidden';
+    login.style.visibility = 'visible';
+}
+
+function logoutButton() {
+    const logout = document.querySelector('.user input.input-button');
+    logout.addEventListener('click', (e) => { logoutButtonHandler(e) }, false);
+}
+
+/*------------Login Form---------------*/
+
+function loginButtonHandler(e) {
+    e.preventDefault();
+    const username = document.querySelector('.login input[name="username"]').value;
+    const password = document.querySelector('.login input[name="password"]').value;
+
+    register(username, password, loginCallBack);
+}
+
+function loginCallBack(username, password, error) {
+    if (username === null) {
+        alert(error);
+    } else {
+        player1 = new AuthPerson(username, password);
+        const user = document.querySelector('.user');
+        const nameDisplay = document.querySelector('.user h2');
+        const login = document.querySelector('.login');
+
+        user.style.visibility = 'visible';
+        login.style.visibility = 'hidden';
+        nameDisplay.innerHTML = username;
+
+    }
+}
+
+function loginButton() {
+    const login = document.querySelector('.login input.input-button');
+    login.addEventListener('click', (e) => { loginButtonHandler(e) }, false);
 }
 
 /*------------GAME MODE Radio Button---------------*/
@@ -136,6 +185,8 @@ function goToInstructions() {
 /*------------Leader Board Button---------------*/
 
 function goToLeaderBoardHandler(e) {
+    ranking(goToleaderboardCallBack);
+
     const game = document.querySelector(".game");
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
@@ -153,6 +204,44 @@ function goToLeaderBoardHandler(e) {
     goToLeaderboard.style.display = "none";
     goToGame.style.display = "block";
     goToInstructions.style.display = "block";
+}
+
+function goToleaderboardCallBack(list) {
+    const listLines = JSON.parse(list).ranking;
+    console.log(listLines);
+
+    const leaderboardTable = document.querySelector(".leaderboard .leaderboard-table");
+
+    while (leaderboardTable.firstChild) {
+        if (leaderboardTable.lastChild.className === 'titles') {
+            break;
+        }
+        leaderboardTable.removeChild(leaderboardTable.lastChild);
+    }
+
+    listLines.forEach(line => {
+
+        let entry = document.createElement("div");
+        entry.className = 'entries';
+
+        let username = document.createElement("span");
+        username.className = 'username';
+        username.innerText = line.nick;
+
+        let victories = document.createElement("span");
+        victories.className = 'victories';
+        victories.innerText = line.victories;
+
+        let gamesPlayed = document.createElement("span");
+        gamesPlayed.className = 'games-played';
+        gamesPlayed.innerText = line.games;
+
+        entry.appendChild(username);
+        entry.appendChild(victories);
+        entry.appendChild(gamesPlayed);
+
+        leaderboardTable.appendChild(entry);
+    });
 }
 
 function goToLeaderBoard() {
@@ -198,6 +287,8 @@ function loadButtons() {
     goToInstructions();
     goToLeaderBoard();
     goToGame();
+    loginButton();
+    logoutButton();
 }
 
 

@@ -1,7 +1,5 @@
 class Player {
-    constructor(board, side) {
-        this.board = board;
-        this.side = side;
+    constructor() {
         this.observers = {};
     }
 
@@ -26,6 +24,13 @@ class Player {
         })
     }
 
+    setBoard(board) {
+        this.board = board;
+    }
+
+    setSide(side) {
+        this.side = side;
+    }
 }
 
 export default Player;

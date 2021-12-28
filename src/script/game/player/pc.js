@@ -1,16 +1,16 @@
 import Player from './player.js';
 
 class PC extends Player {
-    constructor(board, side, difficulty) {
-        super(board, side);
+    constructor(difficulty) {
+        super();
         this.difficulty = difficulty;
-        this.interruptsToPlay = 3;
+        this.interruptsToPlay = 1;
     }
 
     play(holeIndex) {
         if (holeIndex === undefined) {
             if (this.interruptsToPlay === 0) {
-                this.interruptsToPlay = 3;
+                this.interruptsToPlay = 1;
                 let capturedSeeds = this.board.storage1.seeds.length;
                 capturedSeeds += this.board.storage2.seeds.length;
 

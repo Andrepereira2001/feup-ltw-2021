@@ -1,6 +1,5 @@
 @import url("https://use.typekit.net/vet2zii.css");
 
-
 /*  ---------Structure----------   */
 
 * {
@@ -18,9 +17,13 @@ body {
     font-size: 25px;
 }
 
-.login, .result, .leaderboard, .instructions{
+.user,
+.result,
+.leaderboard,
+.instructions {
     visibility: hidden;
 }
+
 
 /*  ---------Logo----------   */
 
@@ -37,10 +40,11 @@ body {
     max-width: 300px;
 }
 
+
 /*  ---------Login/User----------   */
 
-
-.login, .user {
+.login,
+.user {
     grid-column: 3 / 6;
     grid-row: 1 / 2;
 }
@@ -55,16 +59,18 @@ body {
 
 .login form .input-text {
     background-color: white;
-    border-color: #EF5C36; 
-    width: 40%; 
-    height: 35px; 
+    border-color: #EF5C36;
+    width: 40%;
+    height: 35px;
     border-radius: 10px;
     margin-right: 10px;
+    font-size: x-large;
 }
 
-.login form .input-button, .user form .input-button  {
+.login form .input-button,
+.user form .input-button {
     background-color: #EF5C36;
-    color: white; 
+    color: white;
     width: 10%;
     min-width: 65px;
     align-self: end;
@@ -82,9 +88,10 @@ body {
     height: 100%;
 }
 
+
 /*  ---------LeaderBoard----------   */
 
-.leaderboard{
+.leaderboard {
     grid-column: 1 / 5;
     grid-row: 2 / 3;
     height: 100%;
@@ -104,7 +111,7 @@ body {
     font-weight: 1000;
 }
 
-.board-leaderboard{
+.board-leaderboard {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,31 +126,33 @@ body {
 .leaderboard-table {
     display: flex;
     align-items: center;
-    justify-content: center;   
+    justify-content: center;
     flex-flow: column;
     width: 60%;
 }
 
-.leaderboard-table span{
+.leaderboard-table span {
     width: 100px;
     text-align: center;
 }
 
-.leaderboard .titles{
-    border-bottom: 2px solid black ;
+.leaderboard .titles {
+    border-bottom: 2px solid black;
     margin-bottom: 20px;
 }
 
-.leaderboard .titles, .leaderboard .entries{
+.leaderboard .titles,
+.leaderboard .entries {
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 100%;
 }
 
+
 /*  ---------Game----------   */
 
-.game{
+.game {
     grid-column: 1 / 5;
     grid-row: 2 / 3;
     display: flex;
@@ -158,9 +167,10 @@ body {
     border-bottom: 3px solid #EF5C36;
 }
 
+
 /*  Board   */
 
-.board{
+.board {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,7 +182,7 @@ body {
     width: 80%;
 }
 
-.gaming-holes{
+.gaming-holes {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -181,7 +191,8 @@ body {
     height: 100%;
 }
 
-.up-holes, .down-holes{
+.up-holes,
+.down-holes {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
@@ -191,24 +202,26 @@ body {
     height: 100%;
 }
 
-.hole{
+.hole {
     display: flex;
     border-radius: 15px;
     margin: 7px;
     width: 50%;
     height: 80%;
     align-items: center;
-} 
+}
 
-.up-holes .hole, .hole.big.left{
+.up-holes .hole,
+.hole.big.left {
     flex-flow: column-reverse;
 }
 
-.down-holes .hole, .hole.big.right {
+.down-holes .hole,
+.hole.big.right {
     flex-flow: column;
 }
 
-.hole .counter{
+.hole .counter {
     display: flex;
     height: 20%;
     border-radius: 15px;
@@ -219,7 +232,7 @@ body {
     font-size: x-large;
 }
 
-.hole .seeds-place{
+.hole .seeds-place {
     position: relative;
     background-color: #333433;
     height: 80%;
@@ -228,16 +241,16 @@ body {
     border: 0.3vw inset #a7462e;
 }
 
-.hole.big{
+.hole.big {
     width: 20%;
     height: 90%;
 }
 
-.hole.big.left{
+.hole.big.left {
     margin-left: 2%;
 }
 
-.hole.big.right{
+.hole.big.right {
     margin-right: 2%;
 }
 
@@ -250,6 +263,7 @@ body {
     border: 0.1vw outset #333433;
     box-shadow: 0.2vw 0.3vw 1vw #636161;
 }
+
 
 /*  Messages   */
 
@@ -276,9 +290,11 @@ body {
     text-align: start;
 }
 
+
 /*  ---------Config/Result----------   */
 
-.config, .result {
+.config,
+.result {
     grid-column: 5 / 6;
     grid-row: 2 / 3;
     margin: 0;
@@ -290,27 +306,35 @@ body {
     flex-flow: column;
 }
 
-.config form, .result{
+.config form,
+.result {
     display: flex;
     flex-flow: column;
     align-items: center;
     width: 100%;
 }
 
-.config label, .config label span{
+.config label,
+.config label span {
     width: 100%;
     text-align: center;
 }
 
+
 /* Hide radio buttons  */
-.game-mode [type = radio], .turn [type = radio], .single-difficulty [type = radio]{ 
+
+.game-mode [type=radio],
+.turn [type=radio],
+.single-difficulty [type=radio] {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.game-mode [type=radio] + span, .turn [type=radio] + span, .single-difficulty [type=radio] + span{
+.game-mode [type=radio]+span,
+.turn [type=radio]+span,
+.single-difficulty [type=radio]+span {
     cursor: pointer;
     background-color: white;
     color: black;
@@ -319,15 +343,22 @@ body {
     padding: 10px;
 }
 
-.game-mode [type=radio]:checked + span, .turn [type=radio]:checked + span, .single-difficulty [type=radio]:checked + span{
+.game-mode [type=radio]:checked+span,
+.turn [type=radio]:checked+span,
+.single-difficulty [type=radio]:checked+span {
     background-color: #EF5C36;
 }
 
-.game-mode, .turn, .single-difficulty {
+.game-mode,
+.turn,
+.single-difficulty {
     margin-bottom: 25px;
 }
 
-.holes, .seeds, .result .player-1, .result .player-2 {
+.holes,
+.seeds,
+.result .player-1,
+.result .player-2 {
     display: flex;
     background-color: white;
     color: black;
@@ -340,12 +371,14 @@ body {
     margin-left: 10px;
 }
 
-.holes span, .seeds span {
+.holes span,
+.seeds span {
     padding-left: 5px;
     padding-right: 5px;
 }
 
-.holes input, .seeds input{
+.holes input,
+.seeds input {
     border-style: none none none solid;
     border-width: 3px;
     border-color: #EF5C36;
@@ -356,12 +389,15 @@ body {
     border-bottom-right-radius: 10px;
     height: 95%;
     text-align: center;
-    font-size: 25px 
+    font-size: 25px
 }
 
-.config form .input-button, .result form .input-button, .config form .start-button, .result form .quit-button {
+.config form .input-button,
+.result form .input-button,
+.config form .start-button,
+.result form .quit-button {
     background-color: #EF5C36;
-    color: white; 
+    color: white;
     width: 10%;
     min-width: 65px;
     align-self: center;
@@ -370,9 +406,11 @@ body {
     font-size: 25px;
 }
 
-.go-to-instructions, .go-to-leaderboard, .go-to-game {
+.go-to-instructions,
+.go-to-leaderboard,
+.go-to-game {
     background-color: #EF5C36;
-    color: white; 
+    color: white;
     width: 10%;
     align-self: center;
     border-radius: 6px;
@@ -385,12 +423,12 @@ body {
     cursor: pointer;
 }
 
-.go-to-game{
+.go-to-game {
     display: none;
 }
 
-
-.result .player-2, .result .player-1{
+.result .player-2,
+.result .player-1 {
     width: 70%;
 }
 
@@ -422,9 +460,10 @@ body {
     border-left: 3px solid#EF5C36;
 }
 
+
 /*  ---------Instructions----------   */
 
-.instructions{
+.instructions {
     grid-column: 1 / 5;
     grid-row: 2 / 3;
     height: 100%;
@@ -456,8 +495,11 @@ body {
     justify-content: center;
 }
 
+
 /* Next & previous buttons */
-.prev-arrow, .next-arrow {
+
+.prev-arrow,
+.next-arrow {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -479,7 +521,9 @@ body {
     right: 0;
 }
 
+
 /* Rules pages indicator */
+
 .rules-page {
     color: white;
     font-size: 12px;
@@ -489,7 +533,9 @@ body {
     right: 0;
 }
 
+
 /* Dots indicators */
+
 .dots {
     align-self: center;
     position: absolute;
@@ -506,12 +552,15 @@ body {
     display: inline-block;
     transition: background-color 0.6s ease;
 }
-  
-.active, .dot:hover {
+
+.active,
+.dot:hover {
     background-color: #000000;
 }
 
+
 /* Fading animation */
+
 .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
@@ -523,21 +572,30 @@ body {
     width: 80%;
     align-self: center;
 }
-  
+
 @-webkit-keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
 }
-  
+
 @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
 }
+
 
 /* ---------Popup---------- */
 
-.popup{
-    background:rgba(0,0,0,.4);
+.popup {
+    background: rgba(0, 0, 0, .4);
     cursor: pointer;
     display: none;
     height: 100%;
@@ -547,12 +605,14 @@ body {
     width: 100%;
     z-index: 10000;
 }
-.popup .helper{
-    display:inline-block;
-    height:100%;
-    vertical-align:middle;
+
+.popup .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
-.popup > div {
+
+.popup>div {
     background-color: #EF5C36;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
@@ -565,6 +625,7 @@ body {
     border-radius: 8px;
     padding: 15px 5%;
 }
+
 .popup-close {
     background-color: #636161;
     border: 3px solid #333433;
@@ -583,32 +644,33 @@ body {
     text-align: center;
     color: #EF5C36;
 }
+
 .popup-close:hover {
     background-color: #868585;
 }
 
-.popup .container{
+.popup .container {
     display: flex;
     flex-flow: column;
 }
 
-.popup .container .player{
+.popup .container .player {
     display: flex;
     flex-flow: column;
 }
 
-.popup .container .scores{
+.popup .container .scores {
     display: flex;
     flex-flow: row;
     align-items: center;
     justify-content: space-around;
 }
 
-.popup .container .player span{
+.popup .container .player span {
     margin: 10px;
 }
 
-.popup .restart-button{
+.popup .restart-button {
     font-size: 25px;
     align-self: center;
     color: white;
@@ -616,6 +678,7 @@ body {
     border-radius: 5px;
     margin-top: 20px;
 }
+
 
 /* ----------Footer---------------- */
 
@@ -625,7 +688,63 @@ footer {
     align-items: center;
     justify-content: center;
     margin: 0;
-    font-weight:lighter;
+    font-weight: lighter;
+    border-top: 3px solid#EF5C36;
+    background-color: #636161;
+}
+
+cursor: pointer;
+display: inline-block;
+font-family: arial;
+font-weight: bold;
+position: absolute;
+top: -20px;
+right: -20px;
+font-size: 25px;
+line-height: 30px;
+width: 30px;
+height: 30px;
+text-align: center;
+color: #EF5C36;
+
+}
+.popup-close:hover {
+    background-color: #868585;
+}
+.popup .container {
+    display: flex;
+    flex-flow: column;
+}
+.popup .container .player {
+    display: flex;
+    flex-flow: column;
+}
+.popup .container .scores {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.popup .container .player span {
+    margin: 10px;
+}
+.popup .restart-button {
+    font-size: 25px;
+    align-self: center;
+    color: white;
+    background-color: #333433;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* ----------Footer---------------- */
+footer {
+    grid-column: 1 / 7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-weight: lighter;
     border-top: 3px solid#EF5C36;
     background-color: #636161;
 }

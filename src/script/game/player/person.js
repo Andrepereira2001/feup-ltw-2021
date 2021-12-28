@@ -1,8 +1,8 @@
 import Player from './player.js';
 
 class Person extends Player {
-    constructor(board, side) {
-        super(board, side);
+    constructor() {
+        super();
     }
 
     //returns true if the player can play again

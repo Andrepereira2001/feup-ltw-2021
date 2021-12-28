@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="./script/utils/instructionSlides.js" defer>
-    </script>
+    <script src="./script/utils/instructionSlides.js" defer></script>
+    <script type="module" src="./script/utils/requests.js"></script>
     <script type="module" src="./script/game/game.js"></script>
     <script type="module" src="./script/game/model/seed.js"> </script>
     <script type="module" src="./script/game/model/hole.js"> </script>
@@ -29,14 +29,14 @@
 
     <section class="login">
         <form>
-            <input class="input-text" type="email" id="email" name="email" placeholder="Email">
+            <input class="input-text" type="text" id="username" name="username" placeholder="Username">
             <input class="input-text" type="password" id="password" name="password" placeholder="Password">
             <input class="input-button" type="submit" value="Submit">
         </form>
     </section>
     <section class="user">
         <form>
-            <h2 class="user-name">André Matilde</h2>
+            <h2 class="user-name"></h2>
             <input class="input-button" type="submit" value="Logout">
         </form>
     </section>
@@ -64,11 +64,11 @@
                     <span class="victories">Victories</span>
                     <span class="games-played">Games Played</span>
                 </div>
-                <div class="entries">
+                <!-- <div class="entries">
                     <span class="username">EU</span>
                     <span class="victories">20</span>
                     <span class="games-played">20</span>
-                </div>
+                </div> -->
             </article>
         </div>
     </section>

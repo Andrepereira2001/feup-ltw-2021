@@ -122,9 +122,7 @@ class Display {
     /*------------Storage Display---------------*/
 
     placeStorage(storage, htmlHole) {
-        while (htmlHole.firstChild) {
-            htmlHole.removeChild(htmlHole.lastChild);
-        }
+        eraseContent(htmlHole)
 
         let counter = document.createElement("div");
         counter.className = 'counter';
@@ -188,7 +186,7 @@ class Display {
     /*------------Messages---------------*/
 
     writeMessage(player, text) {
-        
+
         const messages = document.querySelector(".game .messages");
 
         const paragraph = document.createElement("p");

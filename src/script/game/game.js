@@ -12,16 +12,24 @@ class Game {
 
         (firstPlayer === 'first') ? this.nextPlayer = 1: this.nextPlayer = 2;
 
+
         if (gameMode === "singleplayer") {
-            this.players[1] = new Person(this.board, 1);
-            this.players[2] = new PC(this.board, 2, difficulty);
-            this.players[1].addObserver('play', this.display);
+            if (this.players[1] === undefined || this.players[1] === null) {
+                this.setPlayer1(new Person())
+            }
+            this.players[2] = new PC(difficulty);
             this.players[2].addObserver('play', this.display);
+            this.players[2].setBoard(this.board);
+            this.players[2].setSide(2);
+
         } else {
-            this.players[1] = new Person(this.board, 1);
-            this.players[2] = new Person(this.board, 2);
-            this.players[1].addObserver('play', this.display);
+            if (this.players[1] === undefined || this.players[1] === null) {
+                //error login must be made
+            }
+            this.players[2] = new Person();
             this.players[2].addObserver('play', this.display);
+            this.players[2].setBoard(this.board);
+            this.players[2].setSide(2);
         }
 
         this.display.createBoard(this);
@@ -29,6 +37,13 @@ class Game {
         this.display.writeMessage(0, "Game has start!")
         this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
     };
+
+    setPlayer1(player) {
+        this.players[1] = player;
+        this.players[1].setBoard(this.board);
+        this.players[1].setSide(1);
+        this.players[1].addObserver('play', this.display);
+    }
 
     /*------------Game Flow---------------*/
     start() {

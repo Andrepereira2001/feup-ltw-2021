@@ -3,40 +3,53 @@ import Display from "./display.js";
 import PC from "./player/pc.js";
 import Person from "./player/person.js";
 
+import { join } from "../utils/requests.js";
+
 class Game {
-    constructor(nHoles = 6, nSeeds = 4, firstPlayer = 'first', gameMode, difficulty) {
+    constructor(nHoles = 6, nSeeds = 4, firstPlayer = 'first') {
         this.board = new Board(nHoles, nSeeds);
         this.display = new Display(document);
         this.players = [];
         this.loopingTimeout = null;
+        this.gameRef = null;
+
+        this.nextPlayerRequest = null;
 
         (firstPlayer === 'first') ? this.nextPlayer = 1: this.nextPlayer = 2;
+    };
 
-
+    setUp(gameMode, difficulty) {
         if (gameMode === "singleplayer") {
             if (this.players[1] === undefined || this.players[1] === null) {
-                this.setPlayer1(new Person())
+                this.setPlayer1(new Person());
             }
             this.players[2] = new PC(difficulty);
             this.players[2].addObserver('play', this.display);
             this.players[2].setBoard(this.board);
             this.players[2].setSide(2);
 
-        } else {
+        } else if (gameMode === "multiplayer") {
             if (this.players[1] === undefined || this.players[1] === null) {
-                //error login must be made
+                alert("User must be logged in");
+                return;
+            } else {
+                join(this.players[1].username, this.players[1].password, this.board.nHoles, this.board.nSeeds,
+                    (res, err) => {
+                        this.setGameRef(res, err)
+                    });
+
+                this.players[2] = new Person();
+                this.players[2].addObserver('play', this.display);
+                this.players[2].setBoard(this.board);
+                this.players[2].setSide(2);
             }
-            this.players[2] = new Person();
-            this.players[2].addObserver('play', this.display);
-            this.players[2].setBoard(this.board);
-            this.players[2].setSide(2);
         }
 
         this.display.createBoard(this);
 
-        this.display.writeMessage(0, "Game has start!")
-        this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
-    };
+        this.display.writeMessage(0, "Game has start!");
+        this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
+    }
 
     setPlayer1(player) {
         if (player !== null) {
@@ -44,6 +57,16 @@ class Game {
             this.players[1].setBoard(this.board);
             this.players[1].setSide(1);
             this.players[1].addObserver('play', this.display);
+        }
+    }
+
+    setGameRef(gameRef, error) {
+        if (gameRef != null) {
+            this.gameRef = gameRef;
+            console.log(this);
+            this.display.setupUpdate(this.players[1].username, gameRef, (state) => { this.updateMultiplayer(state) });
+        } else {
+            alert(error);
         }
     }
 
@@ -57,9 +80,9 @@ class Game {
     handleEvent(side, holeIndex) {
         if (side === this.nextPlayer || side === undefined) {
             //verify if player should change
-            if (this.players[this.nextPlayer].play(holeIndex) === false) {
+            if (this.players[this.nextPlayer].play(holeIndex, this.gameRef) === false) {
                 this.nextPlayer = (this.nextPlayer % 2) + 1;
-                this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`)
+                this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
             }
 
             if (this.verifyEnd()) {
@@ -67,6 +90,27 @@ class Game {
             }
 
             this.display.drawBoard(this);
+        }
+    }
+
+    updateMultiplayer(state) {
+
+        let holeIndex = state.pit;
+
+        if (holeIndex === undefined) {
+            if (state.board.turn === this.players[1].username) {
+                this.nextPlayer = 1
+            } else {
+                this.nextPlayer = 2;
+            }
+        } else if (this.nextPlayerRequest === 2) {
+            this.handleEvent(this.nextPlayerRequest, (this.board.nHoles - holeIndex - 1));
+        }
+
+        if (state.board.turn === this.players[1].username) {
+            this.nextPlayerRequest = 1;
+        } else {
+            this.nextPlayerRequest = 2;
         }
     }
 

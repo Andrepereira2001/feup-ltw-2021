@@ -7,6 +7,7 @@ class Person extends Player {
 
     //returns true if the player can play again
     play(holeIndex) {
+        console.log("called", holeIndex);
         if (holeIndex !== undefined) {
             let capturedSeeds = this.board.storage1.seeds.length;
             capturedSeeds += this.board.storage2.seeds.length;

@@ -40,7 +40,72 @@ function ranking(callback) {
         });
 }
 
+function join(username, password, nHoles, nSeeds, callback) {
+    const url = baseUrl + "/join";
+
+    fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                group: "2802",
+                nick: username,
+                password: password,
+                size: nHoles,
+                initial: nSeeds
+            })
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                res.text().then((text) => {
+                    const gameRef = JSON.parse(text).game;
+                    callback(gameRef)
+                });
+            } else {
+                res.text().then((text) => { callback(null, null, text) });
+            }
+        })
+        .catch((err) => {
+            console.log("error", err)
+            return false;
+        })
+}
+
+function notify(username, password, gameRef, playerMove, callback) {
+    const url = baseUrl + "/notify";
+
+    fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                nick: username,
+                password: password,
+                game: gameRef,
+                move: playerMove
+            })
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                callback(null);
+            } else {
+                res.text().then((text) => { callback(text) });
+            }
+        })
+        .catch((err) => {
+            console.log("error", err)
+            return false;
+        })
+}
+
+function update(username, gameRef) {
+    const url = baseUrl + "/update?nick=" + username + '&game=' + gameRef;
+
+    const evtSource = new EventSource(url);
+
+    return evtSource;
+}
+
 export {
     register,
-    ranking
+    ranking,
+    join,
+    notify,
+    update
 };

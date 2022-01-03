@@ -88,8 +88,9 @@ function startButtonHandler(e) {
     const gameMode = document.querySelector('input[name="game-mode"]:checked');
     const difficulty = document.querySelector('input[name="single-difficulty"]:checked');
 
-    game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value, gameMode.value, difficulty.value);
+    game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value);
     game.setPlayer1(player1);
+    game.setUp(gameMode.value, difficulty.value);
     game.start();
 
     const result = document.querySelector(".result");

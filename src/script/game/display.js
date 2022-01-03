@@ -1,6 +1,16 @@
+import { update } from "../utils/requests.js";
+
 class Display {
     constructor(document) {
         this.document = document;
+    }
+
+    setupUpdate(username, gameRef, callback) {
+        update(username, gameRef).onmessage = (e) => {
+            const data = JSON.parse(e.data);
+            console.log(data);
+            callback(data);
+        };
     }
 
     /*------------Board Display---------------*/

@@ -63,11 +63,14 @@ function loginButton() {
 function singleButtonHandler(e) {
     const gameMode = document.querySelectorAll('input[name="game-mode"]');
     const difficulty = document.getElementsByClassName("single-difficulty")[0];
+    const turn = document.getElementsByClassName("turn")[0];
 
     if (gameMode[0].checked && !gameMode[1].checked) {
         difficulty.style.display = "block";
+        turn.style.display = "block";
     } else if (gameMode[1].checked && !gameMode[0].checked) {
         difficulty.style.display = "none";
+        turn.style.display = "none";
     }
 }
 

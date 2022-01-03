@@ -47,8 +47,6 @@ class Game {
 
         this.display.createBoard(this);
 
-        this.display.writeMessage(0, "Game has start!");
-        this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
     }
 
     setPlayer1(player) {
@@ -97,16 +95,21 @@ class Game {
 
         let holeIndex = state.pit;
 
+        //paring complete
         if (holeIndex === undefined) {
             if (state.board.turn === this.players[1].username) {
                 this.nextPlayer = 1
             } else {
                 this.nextPlayer = 2;
             }
+            this.display.writeMessage(0, "Game has start!");
+            this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
+        // receive notification from other player
         } else if (this.nextPlayerRequest === 2) {
-            this.handleEvent(this.nextPlayerRequest, (this.board.nHoles - holeIndex - 1));
+            this.handleEvent(2 , (this.board.nHoles - holeIndex - 1));
         }
 
+        //refresh the player that must play next
         if (state.board.turn === this.players[1].username) {
             this.nextPlayerRequest = 1;
         } else {

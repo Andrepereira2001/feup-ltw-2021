@@ -8,7 +8,7 @@ import { join } from "../utils/requests.js";
 class Game {
     constructor(nHoles = 6, nSeeds = 4, firstPlayer = 'first') {
         this.board = new Board(nHoles, nSeeds);
-        this.display = new Display(document);
+        this.display = new Display();
         this.players = [];
         this.loopingTimeout = null;
         this.gameRef = null;
@@ -25,6 +25,7 @@ class Game {
             }
             this.players[2] = new PC(difficulty);
             this.players[2].addObserver('play', this.display);
+            this.players[2].addObserver('timer', this);
             this.players[2].setBoard(this.board);
             this.players[2].setSide(2);
 
@@ -40,6 +41,7 @@ class Game {
 
                 this.players[2] = new Person();
                 this.players[2].addObserver('play', this.display);
+                this.players[2].addObserver('timer', this);
                 this.players[2].setBoard(this.board);
                 this.players[2].setSide(2);
             }
@@ -55,6 +57,7 @@ class Game {
             this.players[1].setBoard(this.board);
             this.players[1].setSide(1);
             this.players[1].addObserver('play', this.display);
+            this.players[1].addObserver('timer', this);
         }
     }
 
@@ -86,7 +89,7 @@ class Game {
             if (this.verifyEnd()) {
                 this.endGame();
             }
-
+            
             this.display.drawBoard(this);
         }
     }
@@ -167,6 +170,14 @@ class Game {
         this.display.erase();
     }
 
+    /*------------Oberser Functions---------------*/
+    timerInterrupt(time){
+        this.display.updateTimer(time);
+        if(time === 0) {
+            this.leaveGame();
+            this.display.endGame('TIME OUT', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
+        }
+    }
 }
 
 export default Game;

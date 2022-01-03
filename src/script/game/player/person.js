@@ -3,11 +3,13 @@ import Player from './player.js';
 class Person extends Player {
     constructor() {
         super();
+        this.timer = 120;
     }
+
+    
 
     //returns true if the player can play again
     play(holeIndex) {
-        console.log("called", holeIndex);
         if (holeIndex !== undefined) {
             let capturedSeeds = this.board.storage1.seeds.length;
             capturedSeeds += this.board.storage2.seeds.length;
@@ -16,10 +18,17 @@ class Person extends Player {
 
             capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
 
+            this.timer = 120;
             super.notify('play', capturedSeeds);
+            super.notify('timer', this.timer);
 
             return keepTurn;
         }
+
+        this.timer -= 1;
+        super.notify('timer', this.timer);
+        
+
         return true;
     }
 }

@@ -1,9 +1,7 @@
 import { update } from "../utils/requests.js";
 
 class Display {
-    constructor(document) {
-        this.document = document;
-    }
+    constructor() {}
 
     setupUpdate(username, gameRef, callback) {
         update(username, gameRef).onmessage = (e) => {
@@ -51,7 +49,7 @@ class Display {
         player1Score.innerHTML = seedsPlayer1;
         player2Score.innerHTML = seedsPlayer2;
 
-        const popup = this.document.querySelector(".popup");
+        const popup = document.querySelector(".popup");
         popup.style.display = "inline";
     }
 
@@ -192,6 +190,11 @@ class Display {
     }
 
     /*------------Messages---------------*/
+
+    updateTimer(time){
+        const timer = document.querySelector(".result .timer span")
+        timer.innerText = time;
+    }
 
     writeMessage(player, text) {
 

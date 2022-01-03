@@ -19,9 +19,15 @@ class Player {
     }
 
     notify(event, capturedSeeds) {
-        this.observers[event].map((observer) => {
-            observer.writeMessage(this.side, `Captured ${capturedSeeds} seeds.`)
-        })
+        if(event === "play"){
+            this.observers[event].map((observer) => {
+                observer.writeMessage(this.side, `Captured ${capturedSeeds} seeds.`)
+            })   
+        }else if(event === "timer"){
+            this.observers[event].map((observer) => {
+                observer.timerInterrupt(this.timer);
+            })   
+        }
     }
 
     setBoard(board) {

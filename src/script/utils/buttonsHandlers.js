@@ -60,7 +60,7 @@ function loginButton() {
 
 /*------------GAME MODE Radio Button---------------*/
 
-function singleButtonHandler(e) {
+function singleButtonHandler() {
     const gameMode = document.querySelectorAll('input[name="game-mode"]');
     const difficulty = document.getElementsByClassName("single-difficulty")[0];
     const turn = document.getElementsByClassName("turn")[0];

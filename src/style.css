@@ -460,6 +460,14 @@ body {
     border-left: 3px solid#EF5C36;
 }
 
+.result .timer{
+    margin-bottom: 20px;
+}
+
+.result .timer span{
+    font-size: xx-large;
+}
+
 
 /*  ---------Instructions----------   */
 

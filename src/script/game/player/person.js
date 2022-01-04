@@ -34,6 +34,8 @@ class Person extends Player {
 
         return true;
     }
+
+    saveResult(){}
 }
 
 

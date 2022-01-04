@@ -165,23 +165,28 @@ function popupRestart() {
 /*------------Instructions Button---------------*/
 
 function goToInstructionsHandler(e) {
+
     const game = document.querySelector(".game");
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
     const form = document.querySelector(".config form");
-
+    const pcboard = document.querySelector(".pcboard");
+    
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
     const goToInstructions = document.querySelector(".go-to-instructions");
-
+    const goToPcboard = document.querySelector(".go-to-pcboard");
+    
     game.style.visibility = "hidden";
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "visible";
-
+    pcboard.style.visibility = "hidden";
+    
     form.style.display = "none";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "block";
     goToInstructions.style.display = "none";
+    goToPcboard.style.display = "block";
 }
 
 function goToInstructions() {
@@ -199,19 +204,23 @@ function goToLeaderBoardHandler(e) {
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
     const form = document.querySelector(".config form");
-
+    const pcboard = document.querySelector(".pcboard");
+    
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
     const goToInstructions = document.querySelector(".go-to-instructions");
-
+    const goToPcboard = document.querySelector(".go-to-pcboard");
+    
     game.style.visibility = "hidden";
     leaderboard.style.visibility = "visible";
     instructions.style.visibility = "hidden";
-
+    pcboard.style.visibility = "hidden";
+    
     form.style.display = "none";
     goToLeaderboard.style.display = "none";
     goToGame.style.display = "block";
     goToInstructions.style.display = "block";
+    goToPcboard.style.display = "block";
 }
 
 function goToleaderboardCallBack(list) {
@@ -256,26 +265,103 @@ function goToLeaderBoard() {
     goToLeaderBoard.addEventListener('click', (e) => { goToLeaderBoardHandler(e) }, false);
 }
 
-/*------------Game Button---------------*/
+function setPcBoard(){
+    const board =  JSON.parse(localStorage.getItem("board"));
+    console.log(board);
 
-function goToGameHandler(e) {
+    const pcboardTable = document.querySelector(".pcboard .pcboard-table");
+
+    while (pcboardTable.firstChild) {
+        if (pcboardTable.lastChild.className === 'titles') {
+            break;
+        }
+        pcboardTable.removeChild(pcboardTable.lastChild);
+    }
+
+    if(board){
+        for (const [key, value] of Object.entries(board)) {
+
+            let entry = document.createElement("div");
+            entry.className = 'entries';
+
+            let difficulty = document.createElement("span");
+            difficulty.className = 'difficulty';
+            difficulty.innerText = key;
+
+            let victories = document.createElement("span");
+            victories.className = 'victories';
+            victories.innerText = value.victories;
+
+            let gamesPlayed = document.createElement("span");
+            gamesPlayed.className = 'games-played';
+            gamesPlayed.innerText = value.games;
+
+            entry.appendChild(difficulty);
+            entry.appendChild(victories);
+            entry.appendChild(gamesPlayed);
+
+            pcboardTable.appendChild(entry);
+        }
+    }
+}
+
+function goToPcBoardHandler(e) {
+    setPcBoard();
+
     const game = document.querySelector(".game");
     const leaderboard = document.querySelector(".leaderboard");
     const instructions = document.querySelector(".instructions");
     const form = document.querySelector(".config form");
+    const pcboard = document.querySelector(".pcboard");
 
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
     const goToInstructions = document.querySelector(".go-to-instructions");
+    const goToPcboard = document.querySelector(".go-to-pcboard");
 
+    game.style.visibility = "hidden";
+    leaderboard.style.visibility = "hidden";
+    instructions.style.visibility = "hidden";
+    pcboard.style.visibility = "visible";
+
+    form.style.display = "none";
+    goToLeaderboard.style.display = "block";
+    goToGame.style.display = "block";
+    goToInstructions.style.display = "block";
+    goToPcboard.style.display = "none";
+}
+
+function goToPcBoard() {
+    const goToPcBoard = document.querySelector(".go-to-pcboard")
+    goToPcBoard.addEventListener('click', (e) => { goToPcBoardHandler(e) }, false);
+}
+
+
+/*------------Game Button---------------*/
+
+function goToGameHandler(e) {
+
+    const game = document.querySelector(".game");
+    const leaderboard = document.querySelector(".leaderboard");
+    const instructions = document.querySelector(".instructions");
+    const form = document.querySelector(".config form");
+    const pcboard = document.querySelector(".pcboard");
+    
+    const goToGame = document.querySelector(".go-to-game");
+    const goToLeaderboard = document.querySelector(".go-to-leaderboard");
+    const goToInstructions = document.querySelector(".go-to-instructions");
+    const goToPcboard = document.querySelector(".go-to-pcboard");
+    
     game.style.visibility = "visible";
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "hidden";
-
+    pcboard.style.visibility = "hidden";
+    
     form.style.display = "flex";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "none";
     goToInstructions.style.display = "block";
+    goToPcboard.style.display = "block";
 }
 
 function goToGame() {
@@ -293,6 +379,7 @@ function loadButtons() {
     gameModeButton();
     goToInstructions();
     goToLeaderBoard();
+    goToPcBoard();
     goToGame();
     loginButton();
     logoutButton();

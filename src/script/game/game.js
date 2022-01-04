@@ -81,9 +81,12 @@ class Game {
 
     /*------------Game Flow---------------*/
     start() {
-        this.handleEvent();
+        clearTimeout(this.loopingTimeout);
 
         this.loopingTimeout = setTimeout(() => { this.start() }, 1000);
+
+        this.handleEvent();
+
     }
 
     handleEvent(side, holeIndex) {
@@ -92,6 +95,7 @@ class Game {
             this.players[this.nextPlayer].play(holeIndex, this.gameRef, this.display.notificationError);
 
             if (this.verifyEnd()) {
+                clearTimeout(this.loopingTimeout);
                 this.endGame();
             }
 
@@ -141,7 +145,23 @@ class Game {
     }
 
     /*------------End Game---------------*/
+    verifyWinner(state) {
+        const winner = state.winner;
 
+        if (winner === null) {
+            this.gameRef = null;
+            return true;
+        } else if (winner !== undefined) {
+            if (this.players[1].username === winner && state.board === undefined) {
+                this.display.endGame('PLAYER 2 LEFT! YOU WIN!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
+            }
+            this.gameRef = null;
+            return true;
+        }
+
+        return false;
+    }
+    
     verifyEnd() {
         let index = 0;
         while (this.board.holes1[index].seeds.length === 0 /*&& this.nextPlayer === 1*/ ) {
@@ -161,24 +181,8 @@ class Game {
         return false;
     }
 
-    verifyWinner(state) {
-        const winner = state.winner;
-
-        if (winner === null) {
-            this.gameRef = null;
-            return true;
-        } else if (winner !== undefined) {
-            if (this.players[1].username === winner && state.board === undefined) {
-                this.display.endGame('PLAYER 2 LEFT! YOU WIN!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
-            }
-            this.gameRef = null;
-            return true;
-        }
-
-        return false;
-    }
-
     endGame() {
+
         for (let i = 0; i < this.board.holes1.length; i++) {
             const seeds1 = this.board.holes1[i].removeSeeds();
             this.board.storage1.seeds = this.board.storage1.seeds.concat(seeds1);
@@ -186,6 +190,8 @@ class Game {
             const seeds2 = this.board.holes2[i].removeSeeds();
             this.board.storage2.seeds = this.board.storage2.seeds.concat(seeds2);
         }
+        
+        this.players[2].saveResult();
 
         if (this.board.storage1.seeds.length === this.board.storage2.seeds.length) {
             this.display.endGame('DRAW', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
@@ -197,13 +203,13 @@ class Game {
             this.display.endGame('DEFEAT', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
             this.display.writeMessage(0, "Better luck next time Player 1.")
         }
-        clearTimeout(this.loopingTimeout);
     }
 
     leaveGame() {
         if (this.gameRef !== null) {
             leave(this.players[1].username, this.players[1].password, this.gameRef, this.display.notificationError);
         }
+
         clearTimeout(this.loopingTimeout);
         this.players[1].removeObservers();
         this.players[2].removeObservers();

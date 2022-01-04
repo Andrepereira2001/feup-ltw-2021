@@ -20,6 +20,7 @@ body {
 .user,
 .result,
 .leaderboard,
+.pcboard,
 .instructions {
     visibility: hidden;
 }
@@ -91,6 +92,7 @@ body {
 
 /*  ---------LeaderBoard----------   */
 
+.pcboard,
 .leaderboard {
     grid-column: 1 / 5;
     grid-row: 2 / 3;
@@ -106,11 +108,13 @@ body {
     border-bottom: 3px solid #EF5C36;
 }
 
+.pcboard h1,
 .leaderboard h1 {
     color: black;
     font-weight: 1000;
 }
 
+.board-pcboard,
 .board-leaderboard {
     display: flex;
     align-items: center;
@@ -123,6 +127,7 @@ body {
     width: 70%;
 }
 
+.pcboard-table,
 .leaderboard-table {
     display: flex;
     align-items: center;
@@ -131,16 +136,20 @@ body {
     width: 60%;
 }
 
+.pcboard-table span,
 .leaderboard-table span {
     width: 100px;
     text-align: center;
 }
 
+.pcboard .titles,
 .leaderboard .titles {
     border-bottom: 2px solid black;
     margin-bottom: 20px;
 }
 
+.pcboard .titles,
+.pcboard .entries,
 .leaderboard .titles,
 .leaderboard .entries {
     display: flex;
@@ -432,6 +441,7 @@ body {
     font-size: 25px;
 }
 
+.go-to-pcboard,
 .go-to-instructions,
 .go-to-leaderboard,
 .go-to-game {

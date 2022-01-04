@@ -30,6 +30,51 @@ class PC extends Player {
 
     /* ----------------MINIMAX---------------- */
 
+    saveResult(){
+        let board =  JSON.parse(localStorage.getItem("board"));
+        if(!board){
+            console.log("not board")
+            board = {
+                easy:{
+                    victories: 0,
+                    games:0
+                },
+                medium:{
+                    victories: 0,
+                    games:0
+                }, 
+                hard:{
+                    victories: 0,
+                    games:0
+                } 
+            }
+        }
+        
+        switch(this.difficulty){
+            case "2":
+                board.easy.games +=1;
+                if (this.board.storage2.seeds.length < this.board.storage1.seeds.length){
+                    board.easy.victories +=1;
+                } 
+                break; 
+            case "5":
+                board.medium.games +=1;
+                if (this.board.storage2.seeds.length < this.board.storage1.seeds.length){
+                    board.medium.victories +=1;
+                } 
+                break;
+            case "7":
+                board.hard.games +=1;
+                if (this.board.storage2.seeds.length < this.board.storage1.seeds.length){
+                    board.hard.victories +=1;
+                } 
+                break;
+        }
+
+        localStorage.removeItem("board");
+        localStorage.setItem("board", JSON.stringify(board));
+    }
+
     getBestHole(depth) {
         let bestVal = -1000;
         let bestHole = -1;

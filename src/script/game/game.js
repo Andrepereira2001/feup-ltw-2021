@@ -26,8 +26,12 @@ class Game {
             this.players[2] = new PC(difficulty);
             this.players[2].addObserver('play', this.display);
             this.players[2].addObserver('timer', this);
+            this.players[2].addObserver('turn', this);
             this.players[2].setBoard(this.board);
             this.players[2].setSide(2);
+
+            this.display.writeMessage(0, "Game has start!");
+            this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
 
         } else if (gameMode === "multiplayer") {
             if (this.players[1] === undefined || this.players[1] === null) {
@@ -42,6 +46,7 @@ class Game {
                 this.players[2] = new Person();
                 this.players[2].addObserver('play', this.display);
                 this.players[2].addObserver('timer', this);
+                this.players[2].addObserver('turn', this);
                 this.players[2].setBoard(this.board);
                 this.players[2].setSide(2);
             }
@@ -58,6 +63,7 @@ class Game {
             this.players[1].setSide(1);
             this.players[1].addObserver('play', this.display);
             this.players[1].addObserver('timer', this);
+            this.players[1].addObserver('turn', this);
         }
     }
 
@@ -81,10 +87,7 @@ class Game {
     handleEvent(side, holeIndex) {
         if (side === this.nextPlayer || side === undefined) {
             //verify if player should change
-            if (this.players[this.nextPlayer].play(holeIndex, this.gameRef, this.display.notificationError) === false) {
-                this.nextPlayer = (this.nextPlayer % 2) + 1;
-                this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
-            }
+            this.players[this.nextPlayer].play(holeIndex, this.gameRef, this.display.notificationError);
 
             if (this.verifyEnd()) {
                 this.endGame();
@@ -190,6 +193,8 @@ class Game {
             leave(this.players[1].username, this.players[1].password, this.gameRef, this.display.notificationError);
         }
         clearTimeout(this.loopingTimeout);
+        this.players[1].removeObservers();
+        this.players[2].removeObservers();
         this.display.erase();
     }
 
@@ -202,6 +207,18 @@ class Game {
         if (time === 0) {
             this.leaveGame();
             this.display.endGame('TIME OUT', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
+        }
+    }
+
+    turnChange(changeTurn) {
+        if (changeTurn) {
+            this.nextPlayer = (this.nextPlayer % 2) + 1;
+        }
+
+        if (this.nextPlayer === 1) {
+            this.display.writeMessage(this.nextPlayer, `Your turn!`);
+        } else {
+            this.display.writeMessage(this.nextPlayer, `Opponent turn!`);
         }
     }
 }

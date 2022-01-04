@@ -3,7 +3,7 @@ import Player from './player.js';
 class Person extends Player {
     constructor() {
         super();
-        this.timer = 150;
+        this.timer = 125;
     }
 
 
@@ -16,18 +16,19 @@ class Person extends Player {
 
             const keepTurn = this.board.spreadSeeds(this.side, holeIndex);
 
+
             capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
 
-            this.timer = 150;
+            this.timer = 125;
             super.notify('play', capturedSeeds);
             super.notify('timer', this.timer);
+            super.notify('turn', !keepTurn);
 
             return keepTurn;
         }
 
         this.timer -= 1;
         super.notify('timer', this.timer);
-
 
         return true;
     }

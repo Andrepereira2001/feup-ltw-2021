@@ -11,7 +11,7 @@ class AuthPerson extends Person {
 
     play(holeIndex, gameRef, error) {
         let val = super.play(holeIndex);;
-        if (holeIndex !== undefined) {
+        if (holeIndex !== undefined && gameRef !== null) {
             notify(this.username, this.password, gameRef, holeIndex, error);
         }
         return val;

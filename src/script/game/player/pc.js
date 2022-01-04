@@ -18,6 +18,7 @@ class PC extends Player {
 
                 capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
                 super.notify('play', capturedSeeds);
+                super.notify('turn', !keepTurn);
 
                 return keepTurn;
             } else {

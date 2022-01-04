@@ -18,15 +18,23 @@ class Player {
         this.observers[event].push(observer);
     }
 
-    notify(event, capturedSeeds) {
-        if(event === "play"){
+    removeObservers() {
+        this.observers = {};
+    }
+
+    notify(event, value) {
+        if (event === "play") {
             this.observers[event].map((observer) => {
-                observer.writeMessage(this.side, `Captured ${capturedSeeds} seeds.`)
-            })   
-        }else if(event === "timer"){
+                observer.writeMessage(this.side, `Captured ${value} seeds.`)
+            })
+        } else if (event === "timer") {
             this.observers[event].map((observer) => {
-                observer.timerInterrupt(this.timer);
-            })   
+                observer.timerInterrupt(value);
+            })
+        } else if (event === "turn") {
+            this.observers[event].map((observer) => {
+                observer.turnChange(value);
+            })
         }
     }
 

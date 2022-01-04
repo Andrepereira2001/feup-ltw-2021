@@ -3,10 +3,12 @@ import Player from './player.js';
 class Person extends Player {
     constructor() {
         super();
-        this.timer = 125;
+        this.resetTimer();
     }
 
-
+    resetTimer() {
+        this.timer = 125
+    }
 
     //returns true if the player can play again
     play(holeIndex) {
@@ -19,7 +21,7 @@ class Person extends Player {
 
             capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
 
-            this.timer = 125;
+            this.resetTimer();
             super.notify('play', capturedSeeds);
             super.notify('timer', this.timer);
             super.notify('turn', !keepTurn);

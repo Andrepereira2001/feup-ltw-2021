@@ -49,6 +49,8 @@ class Game {
                 this.players[2].addObserver('turn', this);
                 this.players[2].setBoard(this.board);
                 this.players[2].setSide(2);
+
+                this.display.loadLoader();
             }
         }
 
@@ -112,6 +114,7 @@ class Game {
             } else {
                 this.nextPlayer = 2;
             }
+            this.removeWaiting();
             this.display.writeMessage(0, "Game has start!");
             this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
             // receive notification from other player
@@ -127,6 +130,15 @@ class Game {
         }
     }
 
+    removeWaiting() {
+        this.board = new Board(this.board.nHoles, this.board.nSeeds);
+        this.display.createBoard(this);
+        this.players[1].board = this.board;
+        this.players[2].board = this.board;
+        this.players[1].resetTimer();
+        this.players[2].resetTimer();
+        this.display.removeLoader();
+    }
 
     /*------------End Game---------------*/
 

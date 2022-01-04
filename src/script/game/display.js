@@ -1,10 +1,13 @@
 import { update } from "../utils/requests.js";
 
 class Display {
-    constructor() {}
+    constructor() {
+        this.eventSource = null;
+    }
 
     setupUpdate(username, gameRef, callback) {
-        update(username, gameRef).onmessage = (e) => {
+        this.eventSource = update(username, gameRef);
+        this.eventSource.onmessage = (e) => {
             const data = JSON.parse(e.data);
             console.log(data);
             callback(data);
@@ -165,6 +168,28 @@ class Display {
         htmlResult.innerText = storage.seeds.length;
     }
 
+    /*------------Loader Display---------------*/
+
+    loadLoader() {
+        const holes = document.querySelectorAll(".game .board .hole.big, .game .board .gaming-holes");
+        const loader = document.querySelector(".game .board .loader");
+
+        holes.forEach((val) => {
+            val.style.display = "none";
+        })
+        loader.style.display = "flex";
+    }
+
+    removeLoader() {
+        const holes = document.querySelectorAll(".game .board .hole.big, .game .board .gaming-holes");
+        const loader = document.querySelector(".game .board .loader");
+
+        holes.forEach((val) => {
+            val.style.display = "flex";
+        })
+        loader.style.display = "none";
+    }
+
     /*------------Erase Functions---------------*/
 
     eraseContent(container) {
@@ -187,6 +212,13 @@ class Display {
         this.erasePoints(document.querySelector(".player-2 .points"));
 
         this.eraseContent(document.querySelector(".messages"));
+
+        this.removeLoader()
+
+        if (this.eventSource !== null) {
+            this.eventSource.close()
+            this.eventSource = null;
+        }
     }
 
     /*------------Messages---------------*/

@@ -9,20 +9,14 @@ class AuthPerson extends Person {
         this.password = password;
     }
 
-    play(holeIndex, gameRef) {
-        let val = true;
+    play(holeIndex, gameRef, error) {
+        let val = super.play(holeIndex);;
         if (holeIndex !== undefined) {
-            val = super.play(holeIndex);
-            notify(this.username, this.password, gameRef, holeIndex, this.notificationError);
+            notify(this.username, this.password, gameRef, holeIndex, error);
         }
         return val;
     }
 
-    notificationError(error) {
-        if (error) {
-            alert(error);
-        }
-    }
 }
 
 

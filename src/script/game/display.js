@@ -20,7 +20,7 @@ class Display {
         this.placeHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0]);
 
         this.addEventClickToHoles(game.board.holes1, document.getElementsByClassName("down-holes")[0], game);
-        this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
+        // this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
     }
 
     drawBoard(game) {
@@ -34,7 +34,7 @@ class Display {
         this.resultDisplay(game.board.storage2, document.querySelector(".player-2 .points"));
 
         this.addEventClickToHoles(game.board.holes1, document.getElementsByClassName("down-holes")[0], game);
-        this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
+        // this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
     }
 
     /*------------End Game Display---------------*/
@@ -191,7 +191,7 @@ class Display {
 
     /*------------Messages---------------*/
 
-    updateTimer(time){
+    updateTimer(time) {
         const timer = document.querySelector(".result .timer span")
         timer.innerText = time;
     }
@@ -220,6 +220,12 @@ class Display {
         messages.appendChild(paragraph);
 
         messages.scrollTop = messages.scrollHeight;
+    }
+
+    notificationError(error) {
+        if (error) {
+            alert(error);
+        }
     }
 }
 

@@ -3,7 +3,7 @@ import Display from "./display.js";
 import PC from "./player/pc.js";
 import Person from "./player/person.js";
 
-import { join } from "../utils/requests.js";
+import { join, leave } from "../utils/requests.js";
 
 class Game {
     constructor(nHoles = 6, nSeeds = 4, firstPlayer = 'first') {
@@ -81,7 +81,7 @@ class Game {
     handleEvent(side, holeIndex) {
         if (side === this.nextPlayer || side === undefined) {
             //verify if player should change
-            if (this.players[this.nextPlayer].play(holeIndex, this.gameRef) === false) {
+            if (this.players[this.nextPlayer].play(holeIndex, this.gameRef, this.display.notificationError) === false) {
                 this.nextPlayer = (this.nextPlayer % 2) + 1;
                 this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
             }
@@ -89,7 +89,7 @@ class Game {
             if (this.verifyEnd()) {
                 this.endGame();
             }
-            
+
             this.display.drawBoard(this);
         }
     }
@@ -97,6 +97,10 @@ class Game {
     updateMultiplayer(state) {
 
         let holeIndex = state.pit;
+
+        if (this.verifyWinner(state) && state.board === undefined) {
+            return;
+        }
 
         //paring complete
         if (holeIndex === undefined) {
@@ -107,9 +111,9 @@ class Game {
             }
             this.display.writeMessage(0, "Game has start!");
             this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
-        // receive notification from other player
+            // receive notification from other player
         } else if (this.nextPlayerRequest === 2) {
-            this.handleEvent(2 , (this.board.nHoles - holeIndex - 1));
+            this.handleEvent(2, (this.board.nHoles - holeIndex - 1));
         }
 
         //refresh the player that must play next
@@ -125,7 +129,7 @@ class Game {
 
     verifyEnd() {
         let index = 0;
-        while (this.board.holes1[index].seeds.length === 0 && this.nextPlayer === 1) {
+        while (this.board.holes1[index].seeds.length === 0 /*&& this.nextPlayer === 1*/ ) {
             index++;
             if (index === this.board.holes1.length) {
                 return true;
@@ -133,11 +137,27 @@ class Game {
         }
 
         index = 0;
-        while (this.board.holes2[index].seeds.length === 0 && this.nextPlayer === 2) {
+        while (this.board.holes2[index].seeds.length === 0 /*&& this.nextPlayer === 2*/ ) {
             index++;
             if (index === this.board.holes2.length) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    verifyWinner(state) {
+        const winner = state.winner;
+
+        if (winner === null) {
+            this.gameRef = null;
+            return true;
+        } else if (winner !== undefined) {
+            if (this.players[1].username === winner && state.board === undefined) {
+                this.display.endGame('PLAYER 2 LEFT! YOU WIN!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
+            }
+            this.gameRef = null;
+            return true;
         }
 
         return false;
@@ -166,14 +186,20 @@ class Game {
     }
 
     leaveGame() {
+        if (this.gameRef !== null) {
+            leave(this.players[1].username, this.players[1].password, this.gameRef, this.display.notificationError);
+        }
         clearTimeout(this.loopingTimeout);
         this.display.erase();
     }
 
-    /*------------Oberser Functions---------------*/
-    timerInterrupt(time){
+
+
+    /*------------Observer Functions---------------*/
+
+    timerInterrupt(time) {
         this.display.updateTimer(time);
-        if(time === 0) {
+        if (time === 0) {
             this.leaveGame();
             this.display.endGame('TIME OUT', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
         }

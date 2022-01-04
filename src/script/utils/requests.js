@@ -90,6 +90,29 @@ function notify(username, password, gameRef, playerMove, callback) {
         })
         .catch((err) => {
             console.log("error", err)
+        })
+}
+
+function leave(username, password, gameRef, callback) {
+    const url = baseUrl + "/leave";
+
+    fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                nick: username,
+                password: password,
+                game: gameRef
+            })
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                callback(null);
+            } else {
+                res.text().then((text) => { callback(text) });
+            }
+        })
+        .catch((err) => {
+            console.log("error", err)
             return false;
         })
 }
@@ -107,5 +130,6 @@ export {
     ranking,
     join,
     notify,
-    update
+    update,
+    leave
 };

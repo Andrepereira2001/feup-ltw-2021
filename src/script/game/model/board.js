@@ -102,18 +102,15 @@ class Board {
         if (hole.side === side && hole.seeds.length === 1) {
             if (side === 1) {
                 const oppHole = this.holes2[hole.index];
-                if (oppHole.seeds.length !== 0) {
-                    const seeds = oppHole.removeSeeds();
-                    const seeds2 = hole.removeSeeds();
-                    this.storage1.seeds = this.storage1.seeds.concat(seeds, seeds2);
-                }
+                const seeds = oppHole.removeSeeds();
+                const seeds2 = hole.removeSeeds();
+                this.storage1.seeds = this.storage1.seeds.concat(seeds, seeds2);
+
             } else {
                 const oppHole = this.holes1[hole.index];
-                if (oppHole.seeds.length !== 0) {
-                    const seeds = oppHole.removeSeeds();
-                    const seeds2 = hole.removeSeeds();
-                    this.storage2.seeds = this.storage2.seeds.concat(seeds, seeds2);
-                }
+                const seeds = oppHole.removeSeeds();
+                const seeds2 = hole.removeSeeds();
+                this.storage2.seeds = this.storage2.seeds.concat(seeds, seeds2);
             }
         }
         return false;

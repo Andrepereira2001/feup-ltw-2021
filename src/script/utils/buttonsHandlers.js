@@ -93,14 +93,15 @@ function startButtonHandler(e) {
 
     game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value);
     game.setPlayer1(player1);
-    game.setUp(gameMode.value, difficulty.value);
-    game.start();
+    if (game.setUp(gameMode.value, difficulty.value)) {
+        game.start();
 
-    const result = document.querySelector(".result");
-    const config = document.querySelector(".config");
+        const result = document.querySelector(".result");
+        const config = document.querySelector(".config");
 
-    result.style.visibility = "visible";
-    config.style.visibility = "hidden";
+        result.style.visibility = "visible";
+        config.style.visibility = "hidden";
+    }
 
 }
 
@@ -171,17 +172,17 @@ function goToInstructionsHandler(e) {
     const instructions = document.querySelector(".instructions");
     const form = document.querySelector(".config form");
     const pcboard = document.querySelector(".pcboard");
-    
+
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
     const goToInstructions = document.querySelector(".go-to-instructions");
     const goToPcboard = document.querySelector(".go-to-pcboard");
-    
+
     game.style.visibility = "hidden";
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "visible";
     pcboard.style.visibility = "hidden";
-    
+
     form.style.display = "none";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "block";
@@ -205,17 +206,17 @@ function goToLeaderBoardHandler(e) {
     const instructions = document.querySelector(".instructions");
     const form = document.querySelector(".config form");
     const pcboard = document.querySelector(".pcboard");
-    
+
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
     const goToInstructions = document.querySelector(".go-to-instructions");
     const goToPcboard = document.querySelector(".go-to-pcboard");
-    
+
     game.style.visibility = "hidden";
     leaderboard.style.visibility = "visible";
     instructions.style.visibility = "hidden";
     pcboard.style.visibility = "hidden";
-    
+
     form.style.display = "none";
     goToLeaderboard.style.display = "none";
     goToGame.style.display = "block";
@@ -265,9 +266,8 @@ function goToLeaderBoard() {
     goToLeaderBoard.addEventListener('click', (e) => { goToLeaderBoardHandler(e) }, false);
 }
 
-function setPcBoard(){
-    const board =  JSON.parse(localStorage.getItem("board"));
-    console.log(board);
+function setPcBoard() {
+    const board = JSON.parse(localStorage.getItem("board"));
 
     const pcboardTable = document.querySelector(".pcboard .pcboard-table");
 
@@ -278,7 +278,7 @@ function setPcBoard(){
         pcboardTable.removeChild(pcboardTable.lastChild);
     }
 
-    if(board){
+    if (board) {
         for (const [key, value] of Object.entries(board)) {
 
             let entry = document.createElement("div");
@@ -346,17 +346,17 @@ function goToGameHandler(e) {
     const instructions = document.querySelector(".instructions");
     const form = document.querySelector(".config form");
     const pcboard = document.querySelector(".pcboard");
-    
+
     const goToGame = document.querySelector(".go-to-game");
     const goToLeaderboard = document.querySelector(".go-to-leaderboard");
     const goToInstructions = document.querySelector(".go-to-instructions");
     const goToPcboard = document.querySelector(".go-to-pcboard");
-    
+
     game.style.visibility = "visible";
     leaderboard.style.visibility = "hidden";
     instructions.style.visibility = "hidden";
     pcboard.style.visibility = "hidden";
-    
+
     form.style.display = "flex";
     goToLeaderboard.style.display = "block";
     goToGame.style.display = "none";

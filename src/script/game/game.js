@@ -31,12 +31,12 @@ class Game {
             this.players[2].setSide(2);
 
             this.display.writeMessage(0, "Game has start!");
-            this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
+            this.display.turnDisplay(this.nextPlayer);
 
         } else if (gameMode === "multiplayer") {
             if (this.players[1] === undefined || this.players[1] === null) {
                 alert("User must be logged in");
-                return;
+                return false;
             } else {
                 join(this.players[1].username, this.players[1].password, this.board.nHoles, this.board.nSeeds,
                     (res, err) => {
@@ -55,6 +55,8 @@ class Game {
         }
 
         this.display.createBoard(this);
+
+        return true;
 
     }
 
@@ -92,10 +94,11 @@ class Game {
     handleEvent(side, holeIndex) {
         if (side === this.nextPlayer || side === undefined) {
             //verify if player should change
+
             this.players[this.nextPlayer].play(holeIndex, this.gameRef, this.display.notificationError);
 
             if (this.verifyEnd()) {
-                clearTimeout(this.loopingTimeout);
+
                 this.endGame();
             }
 
@@ -120,7 +123,7 @@ class Game {
             }
             this.removeWaiting();
             this.display.writeMessage(0, "Game has start!");
-            this.display.writeMessage(this.nextPlayer, `Player ${this.nextPlayer} turn.`);
+            this.display.turnDisplay(this.nextPlayer);
             // receive notification from other player
         } else if (this.nextPlayerRequest === 2) {
             this.handleEvent(2, (this.board.nHoles - holeIndex - 1));
@@ -161,7 +164,7 @@ class Game {
 
         return false;
     }
-    
+
     verifyEnd() {
         let index = 0;
         while (this.board.holes1[index].seeds.length === 0 /*&& this.nextPlayer === 1*/ ) {
@@ -182,6 +185,7 @@ class Game {
     }
 
     endGame() {
+        clearTimeout(this.loopingTimeout);
 
         for (let i = 0; i < this.board.holes1.length; i++) {
             const seeds1 = this.board.holes1[i].removeSeeds();
@@ -190,7 +194,7 @@ class Game {
             const seeds2 = this.board.holes2[i].removeSeeds();
             this.board.storage2.seeds = this.board.storage2.seeds.concat(seeds2);
         }
-        
+
         this.players[2].saveResult();
 
         if (this.board.storage1.seeds.length === this.board.storage2.seeds.length) {
@@ -233,11 +237,7 @@ class Game {
             this.nextPlayer = (this.nextPlayer % 2) + 1;
         }
 
-        if (this.nextPlayer === 1) {
-            this.display.writeMessage(this.nextPlayer, `Your turn!`);
-        } else {
-            this.display.writeMessage(this.nextPlayer, `Opponent turn!`);
-        }
+        this.display.turnDisplay(this.nextPlayer);
     }
 }
 

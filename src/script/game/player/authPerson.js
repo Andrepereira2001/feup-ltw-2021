@@ -10,11 +10,10 @@ class AuthPerson extends Person {
     }
 
     play(holeIndex, gameRef, error) {
-        let val = super.play(holeIndex);;
-        if (holeIndex !== undefined && gameRef !== null) {
+        if (super.play(holeIndex) && gameRef !== null) {
             notify(this.username, this.password, gameRef, holeIndex, error);
         }
-        return val;
+
     }
 
 }

@@ -12,12 +12,11 @@ class Person extends Player {
 
     //returns true if the player can play again
     play(holeIndex) {
-        if (holeIndex !== undefined) {
+        if (holeIndex !== undefined && this.board.isValidMove(this.side, holeIndex)) {
             let capturedSeeds = this.board.storage1.seeds.length;
             capturedSeeds += this.board.storage2.seeds.length;
 
             const keepTurn = this.board.spreadSeeds(this.side, holeIndex);
-
 
             capturedSeeds = this.board.storage1.seeds.length + this.board.storage2.seeds.length - capturedSeeds;
 
@@ -26,16 +25,16 @@ class Person extends Player {
             super.notify('timer', this.timer);
             super.notify('turn', !keepTurn);
 
-            return keepTurn;
+            return true;
         }
 
         this.timer -= 1;
         super.notify('timer', this.timer);
 
-        return true;
+        return false;
     }
 
-    saveResult(){}
+    saveResult() {}
 }
 
 

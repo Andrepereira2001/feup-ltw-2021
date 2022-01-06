@@ -17,14 +17,17 @@ class Board {
         this.storage2 = new Hole(-1, 2, 0);
     }
 
-    // constructor(nHoles, nSeeds, holes1, holes2, storage1, storage2) {
-    //     this.nHoles = nHoles;
-    //     this.nSeeds = nSeeds;
-    //     this.holes1 = holes1;
-    //     this.holes2 = holes2;
-    //     this.storage1 = storage1;
-    //     this.storage2 = storage2;
-    // }
+    isValidMove(side, holeIndex) {
+        let nSeeds = 0;
+        if (side === 1) {
+            nSeeds = this.holes1[holeIndex].seeds.length;
+        } else {
+            nSeeds = this.holes2[holeIndex].seeds.length;
+        }
+
+        return !(nSeeds === 0 || nSeeds === undefined);
+    }
+
 
     getHole(side, holeIndex) {
         if (side == 1) {

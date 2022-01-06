@@ -24,6 +24,10 @@ class Display {
 
         this.addEventClickToHoles(game.board.holes1, document.getElementsByClassName("down-holes")[0], game);
         // this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
+
+        if (game.nextPlayer === 1) {
+            this.highlightHolesToPlay();
+        }
     }
 
     drawBoard(game) {
@@ -37,7 +41,19 @@ class Display {
         this.resultDisplay(game.board.storage2, document.querySelector(".player-2 .points"));
 
         this.addEventClickToHoles(game.board.holes1, document.getElementsByClassName("down-holes")[0], game);
+
+        if (game.nextPlayer === 1) {
+            this.highlightHolesToPlay();
+        }
         // this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
+    }
+
+    turnDisplay(nextPlayer) {
+        if (nextPlayer === 1) {
+            this.writeMessage(nextPlayer, `Your turn!`);
+        } else {
+            this.writeMessage(nextPlayer, `Opponent turn!`);
+        }
     }
 
     /*------------End Game Display---------------*/
@@ -126,6 +142,16 @@ class Display {
 
             hole = hole.nextElementSibling;
         })
+    }
+
+    highlightHolesToPlay() {
+        let downHoles = document.querySelectorAll(".gaming-holes .down-holes .hole .seeds-place");
+
+        downHoles.forEach((val) => {
+            val.style.borderColor = "#FFFFFF";
+            val.style.cursor = "pointer";
+            val.classList.add("playing-turn");
+        });
     }
 
     /*------------Storage Display---------------*/
@@ -260,5 +286,69 @@ class Display {
         }
     }
 }
+
+
+// window.requestAnimFrame = function() {
+//     return (
+//         window.requestAnimationFrame ||
+//         window.webkitRequestAnimationFrame ||
+//         window.mozRequestAnimationFrame ||
+//         window.oRequestAnimationFrame ||
+//         window.msRequestAnimationFrame ||
+//         function( /* function */ callback) {
+//             window.setTimeout(callback, 1000 / 60);
+//         }
+//     );
+// }();
+
+// var canvas = document.getElementById('canvas');
+
+// var context = canvas.getContext('2d');
+
+// var W = window.innerWidth,
+//     H = window.innerHeight;
+// canvas.width = W;
+// canvas.height = 2000;
+
+// var particle;
+
+// function Particle(radius, y, x) {
+//     this.radius = radius;
+//     this.x = x;
+//     this.y = y;
+
+//     this.move = function() {
+//         var dateDev = new Date();
+//         var unite = dateDev.getSeconds() + (dateDev.getMilliseconds() / 1000);
+//         var diviseur = 30;
+//         var texte = unite;
+//         context.beginPath();
+//         context.globalCompositeOperation = 'source-over';
+//         context.font = this.radius + "px Arial";
+//         context.textAlign = 'center';
+//         context.textBaseline = 'middle';
+//         context.fillStyle = 'white';
+//         context.fillText(Math.floor(texte), this.x, this.y);
+//         context.globalCompositeOperation = 'destination-over';
+
+//         context.fill();
+//         context.fillStyle = "#3498db";
+//         context.strokeStyle = "#3498db";
+//         context.arc(this.x, this.y, this.radius, (Math.PI * 1.5), (Math.PI) * (unite / diviseur) + (Math.PI * 1.5), true);
+//         context.lineTo(this.x, this.y);
+//         context.fill();
+//         context.closePath();
+//     };
+// };
+
+// particle = new Particle(75, 90, 90);
+
+// function animate() {
+//     context.clearRect(0, 0, canvas.width, canvas.height);
+//     particle.move();
+//     requestAnimFrame(animate);
+// }
+
+// animate();
 
 export default Display;

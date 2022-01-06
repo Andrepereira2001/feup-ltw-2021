@@ -93,14 +93,15 @@ function startButtonHandler(e) {
 
     game = new Game(holesInput.value, seedsInput.value, playerFirstTurn.value);
     game.setPlayer1(player1);
-    game.setUp(gameMode.value, difficulty.value);
-    game.start();
+    if (game.setUp(gameMode.value, difficulty.value)) {
+        game.start();
 
-    const result = document.querySelector(".result");
-    const config = document.querySelector(".config");
+        const result = document.querySelector(".result");
+        const config = document.querySelector(".config");
 
-    result.style.visibility = "visible";
-    config.style.visibility = "hidden";
+        result.style.visibility = "visible";
+        config.style.visibility = "hidden";
+    }
 
 }
 
@@ -267,7 +268,6 @@ function goToLeaderBoard() {
 
 function setPcBoard() {
     const board = JSON.parse(localStorage.getItem("board"));
-    console.log(board);
 
     const pcboardTable = document.querySelector(".pcboard .pcboard-table");
 
@@ -390,10 +390,4 @@ window.onload = () => {
     console.log("loading");
     loadButtons();
 
-
-    // const evtSource = new EventSource("http://localhost:8000/update");
-    // evtSource.onmessage = (e) => {
-    //     const data = JSON.parse(e.data);
-    //     console.log(data);
-    // };
 }

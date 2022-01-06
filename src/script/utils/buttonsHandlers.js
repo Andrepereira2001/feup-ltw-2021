@@ -390,4 +390,54 @@ window.onload = () => {
     console.log("loading");
     loadButtons();
 
+
+    var canvas = document.getElementById('canvas');
+
+    var context = canvas.getContext('2d');
+
+
+    canvas.width = 200;
+    canvas.height = 200;
+
+    var particle;
+
+    function Particle(radius, y, x) {
+        this.radius = radius;
+        this.x = x;
+        this.y = y;
+
+        this.move = function() {
+            var dateDev = new Date();
+            var unite = dateDev.getSeconds() + (dateDev.getMilliseconds() / 1000);
+            var diviseur = 30;
+            var texte = unite;
+            context.beginPath();
+            context.globalCompositeOperation = 'source-over';
+            context.font = this.radius + "px Arial";
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillStyle = 'white';
+            context.fillText(Math.floor(texte), this.x, this.y);
+            context.globalCompositeOperation = 'destination-over';
+
+            context.fill();
+            context.fillStyle = "#3498db";
+            context.strokeStyle = "#3498db";
+            context.arc(this.x, this.y, this.radius, (Math.PI * 1.5), (Math.PI) * (unite / diviseur) + (Math.PI * 1.5), true);
+            context.lineTo(this.x, this.y);
+            context.fill();
+            context.closePath();
+        };
+    };
+
+    particle = new Particle(75, 90, 90);
+
+    function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        particle.move();
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
 }

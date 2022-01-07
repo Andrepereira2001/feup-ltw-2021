@@ -3,6 +3,7 @@ import { update } from "../utils/requests.js";
 class Display {
     constructor() {
         this.eventSource = null;
+        this.animationFrame = null;
     }
 
     setupUpdate(username, gameRef, callback) {
@@ -24,6 +25,8 @@ class Display {
 
         this.addEventClickToHoles(game.board.holes1, document.getElementsByClassName("down-holes")[0], game);
         // this.addEventClickToHoles(game.board.holes2, document.getElementsByClassName("up-holes")[0], game);
+
+        this.animateTimer();
 
         if (game.nextPlayer === 1) {
             this.highlightHolesToPlay();
@@ -245,6 +248,51 @@ class Display {
             this.eventSource.close()
             this.eventSource = null;
         }
+
+        if (this.animationFrame !== null) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+    }
+
+    /*--------------Timer----------------*/
+
+    redrawTimer(){
+        const canvas = document.querySelector('.result .timer');
+        const context = canvas.getContext('2d');
+    
+        canvas.width = 140;
+        canvas.height = 140;
+    
+        var dateDev = new Date();
+        var unite = dateDev.getSeconds() + (dateDev.getMilliseconds() / 1000);
+        var unite = 1;
+        var diviseur = 30;
+        var texte = unite;
+        context.beginPath();
+        context.globalCompositeOperation = 'source-over';
+        context.font = 50 + "px Arial";
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = 'white';
+        context.fillText(Math.floor(texte), 70, 70);
+        context.globalCompositeOperation = 'destination-over';
+    
+        context.fill();
+        context.fillStyle = "#EF5C36";
+        context.strokeStyle = "#EF5C36";
+        context.arc(70, 70, 50, (Math.PI * 1.5), (Math.PI) * (unite / diviseur) + (Math.PI * 1.5), true);
+        context.lineTo(70, 70);
+        context.fill();
+        context.closePath();
+    }
+
+    animateTimer() {
+        const canvas = document.querySelector('.result .timer');
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, 140, 130);
+        this.redrawTimer();
+        this.animationFrame = requestAnimationFrame(() => {this.animateTimer()});
     }
 
     /*------------Messages---------------*/

@@ -1,6 +1,6 @@
 "use strict";
 
-let PORT = 8000;
+let PORT = 3000;
 
 let http = require('http');
 let url = require('url');
@@ -31,24 +31,46 @@ const server = http.createServer(function(request, response) {
 
     switch (request.method) {
         case 'GET':
-            answer = doGet(pathname, request, response);
+            response.writeHead(200, headers['sse']);
+            doGet(pathname, request, response, (error, answer = {}) => {
+                if(!error){
+                    if(answer.status !== undefined && answer.status !== 200){
+                        response.writeHead(answer.status, headers['sse']);
+                    }
+                    if (answer.body === undefined) {
+                        response.write(JSON.stringify({}) + '\n\n');
+                    } else {
+                        response.write(JSON.stringify(answer.body) +  '\n\n');
+                    }
+                }
+                else {
+                    response.writeHead(error.status, headers['plain']);
+                    response.end(JSON.stringify(error.body));
+                }
+            });
             break;
         case 'POST':
             doPost(pathname, request, (error, answer = {}) => {
                 console.log("callback", answer);
-                if (answer.status === undefined)
-                    answer.status = 200;
-                if (answer.style === undefined)
-                    answer.style = 'plain';
+                if(!error){
+                    if (answer.status === undefined)
+                        answer.status = 200;
+                    if (answer.style === undefined)
+                        answer.style = 'plain';
 
-                response.writeHead(answer.status, headers[answer.style]);
+                    response.writeHead(answer.status, headers[answer.style]);
 
-                if (answer.style === 'plain') {
-                    if (answer.body === undefined) {
-                        response.end(JSON.stringify({}));
-                    } else {
-                        response.end(JSON.stringify(answer.body));
+                    if (answer.style === 'plain') {
+                        if (answer.body === undefined) {
+                            response.end(JSON.stringify({}));
+                        } else {
+                            response.end(JSON.stringify(answer.body));
+                        }
                     }
+                }
+                else {
+                    response.writeHead(error.status, headers['plain']);
+                    response.end(JSON.stringify(error.body));
                 }
 
             });
@@ -57,17 +79,6 @@ const server = http.createServer(function(request, response) {
             answer.status = 400;
     }
 
-
-    // if (answer.status === undefined)
-    //     answer.status = 200;
-    // if (answer.style === undefined)
-    //     answer.style = 'plain';
-
-    // response.writeHead(answer.status, headers[answer.style]);
-
-    // if (answer.style === 'plain')
-    //     response.end(answer.body);
-
 });
 
 server.listen(PORT, () => {
@@ -75,18 +86,26 @@ server.listen(PORT, () => {
 })
 
 
-function doGet(pathname, request, response) {
+function doGet(pathname, request, response, callback) {
     let answer = {};
 
     switch (pathname) {
         case '/update':
-            updater.remember(response);
-            request.on('close', () =>
-                updater.forget(response));
-            setImmediate(() =>
-                updater.update(
-                    model.get()));
-            answer.style = 'sse';
+            const params = url.parse(request.url, true).query;
+            updater.rememberGame(params.game, response, (err, res) => {
+                if(!err){
+                    request.on('close', () => {
+                        //updater.forgetGame(params.game,response)
+                    });
+                    const message = model.get(params.game);
+                    if(message !== undefined){
+                        updater.updateGame(params.game, message)
+                    }
+                    callback(null,res)
+                }else {
+                    callback(err);
+                }
+            });
             break;
         default:
             answer.status = 400;
@@ -100,14 +119,14 @@ function doPost(pathname, request, callback) {
     var answer = {};
 
     switch (pathname) {
-        case '/incr':
-            model.incr();
-            updater.update(model.get());
-            break;
-        case '/reset':
-            model.reset();
-            updater.update(model.get());
-            break;
+        // case '/incr':
+        //     model.incr();
+        //     updater.update(model.get());
+        //     break;
+        // case '/reset':
+        //     model.reset();
+        //     updater.update(model.get());
+        //     break;
         case '/register':
             let body = '';
             request.on('data', (chunk) => {
@@ -126,6 +145,46 @@ function doPost(pathname, request, callback) {
                 })
                 .on('error', (err) => { console.log(err.message); });
             break;
+
+        case '/join':
+            let joinBody = '';
+            request.on('data', (chunk) => {
+                    joinBody += chunk;
+                })
+                .on('end', () => {
+                    try {
+                        const data = JSON.parse(joinBody);
+                        model.join(data, (err, answer) => {
+                            callback(err, answer);
+                        });
+                    } catch (err) {
+                        answer.status = 400;
+                        callback(err, answer);
+                    } /* erros de JSON */
+                })
+                .on('error', (err) => { console.log(err.message); });
+            break;
+
+
+        case '/leave':
+            let leaveBody = '';
+            request.on('data', (chunk) => {
+                    leaveBody += chunk;
+                })
+                .on('end', () => {
+                    try {
+                        const data = JSON.parse(leaveBody);
+                        model.leave(data, (err, answer) => {
+                            callback(err, answer);
+                        });
+                    } catch (err) {
+                        answer.status = 400;
+                        callback(err, answer);
+                    } /* erros de JSON */
+                })
+                .on('error', (err) => { console.log(err.message); });
+            break;
+
         case '/ranking':
             request.on('data', () => {})
                 .on('end', () => {
@@ -142,7 +201,7 @@ function doPost(pathname, request, callback) {
             break;
         default:
             answer.status = 400;
-            callback(err, answer);
+            //callback(err, answer);
             break;
     }
 }

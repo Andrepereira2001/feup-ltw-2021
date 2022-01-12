@@ -49,6 +49,8 @@ class Game {
                 this.players[2].addObserver('turn', this);
                 this.players[2].setBoard(this.board);
                 this.players[2].setSide(2);
+                this.players[1].resetTimer();
+                this.players[2].resetTimer();
 
                 this.display.loadLoader();
             }
@@ -122,6 +124,7 @@ class Game {
                 this.nextPlayer = 2;
             }
             this.removeWaiting();
+
             this.display.writeMessage(0, "Game has start!");
             this.display.turnDisplay(this.nextPlayer);
             // receive notification from other player

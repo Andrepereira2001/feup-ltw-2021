@@ -6,8 +6,6 @@ let game = null;
 
 let player1 = null;
 
-let animeationFrame = null;
-
 /*------------Logout Form---------------*/
 
 function logoutButtonHandler(e) {

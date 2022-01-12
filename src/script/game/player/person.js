@@ -7,7 +7,7 @@ class Person extends Player {
     }
 
     resetTimer() {
-        this.timer = 125
+        this.timer = 125;
     }
 
     //returns true if the player can play again

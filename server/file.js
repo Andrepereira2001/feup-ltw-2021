@@ -23,7 +23,6 @@ module.exports.readCredentials = (callback) => {
             callback(null, dados);
         }
     });
-
 }
 
 module.exports.writeCredentials = (data, callback) => {

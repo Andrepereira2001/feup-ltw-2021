@@ -46,7 +46,7 @@ function join(username, password, nHoles, nSeeds, callback) {
     fetch(url, {
             method: "POST",
             body: JSON.stringify({
-                group: 11,
+                group: 72,
                 nick: username,
                 password: password,
                 size: nHoles,

@@ -30,6 +30,7 @@ class Game {
             this.players[2].setBoard(this.board);
             this.players[2].setSide(2);
 
+            this.players[1].resetTimer();
             this.display.writeMessage(0, "Game has start!");
             this.display.turnDisplay(this.nextPlayer);
 

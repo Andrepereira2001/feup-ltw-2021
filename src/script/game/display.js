@@ -264,20 +264,25 @@ class Display {
         canvas.width = 140;
         canvas.height = 140;
 
-        var diviseur = 62.5;
+        const minutes = Math.floor(time / 60);
+        const seconds =  Math.floor(time % 60);
+        const divisor = 62.5;
+        const startAngle = (Math.PI * 1.5);
+        const currAngle = (Math.PI) * (-time / divisor) + (Math.PI * 1.5);
         context.beginPath();
         context.globalCompositeOperation = 'source-over';
-        context.font = 50 + "px Arial";
+        context.font = "40px Arial";
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         context.fillStyle = 'white';
-        context.fillText(Math.floor(time), 70, 70);
+        
+        context.fillText(minutes + ':' + String(seconds).padStart(2, '0'), 70, 70);
         context.globalCompositeOperation = 'destination-over';
 
         context.fill();
         context.fillStyle = "#EF5C36";
         context.strokeStyle = "#EF5C36";
-        context.arc(70, 70, 50, (Math.PI * 1.5), (Math.PI) * (-time / diviseur) + (Math.PI * 1.5), true);
+        context.arc(70, 70, 50, startAngle, currAngle, true);
         context.lineTo(70, 70);
         context.fill();
         context.closePath();

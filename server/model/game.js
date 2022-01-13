@@ -80,11 +80,11 @@ module.exports = class Game {
 
     }
 
-    handleEvent(side, holeIndex) {
-        if (side === this.nextPlayer || side === undefined) {
+    makeMove(player, holeIndex) {
+        if (player === this.players[this.nextPlayer].name || player === undefined) {
             //verify if player should change
 
-            this.players[this.nextPlayer].play(holeIndex, this.gameRef, this.display.notificationError);
+            this.players[this.nextPlayer].play(holeIndex);
 
             if (this.verifyEnd()) {
 
@@ -133,14 +133,7 @@ module.exports = class Game {
         }
 
         this.players[2].saveResult();
-
-        if (this.board.storage1.seeds.length === this.board.storage2.seeds.length) {
-            this.display.endGame('DRAW', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
-        } else if (this.board.storage1.seeds.length > this.board.storage2.seeds.length) {
-            this.display.endGame('VICTORY', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
-        } else {
-            this.display.endGame('DEFEAT', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
-        }
+        this.players[1].saveResult();
     }
 
     /*------------Observer Functions---------------*/

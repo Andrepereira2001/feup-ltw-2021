@@ -77,9 +77,11 @@ module.exports.leaveGame = (hash, player) => {
 module.exports.notifyGame = (hash, player, move, callback) => {
     console.log(hash, player, move);
     if(games[hash] !== undefined && games[hash].verifyMove(player,move)){
-        console.log("veryfied");
         //DO MOVE
-        //updater.updateGame(hash,{winner: winner})
+        games[hash].makeMove(player,move);
+        const message = games[hash].printBoard();
+        message.pit = move;
+        updater.updateGame(hash,message);
     }else {
         callback({
             status: 400,

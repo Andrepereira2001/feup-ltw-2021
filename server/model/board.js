@@ -87,12 +87,6 @@ module.exports = class Board {
         this.storage2 = board.storage2.clone();
     }
 
-    clone() {
-        let board = new Board()
-        board.setBoard(this);
-        return board;
-    }
-
     //returns true if the player can play again
     spreadSeeds(side, holeIndex) {
         let hole = this.getHole(side, holeIndex);

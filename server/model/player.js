@@ -24,14 +24,14 @@ module.exports = class Player {
             const keepTurn = this.board.spreadSeeds(this.side, holeIndex);
 
             this.resetTimer();
-            super.notify('timer', this.timer);
-            super.notify('turn', !keepTurn);
+            this.notify('timer', this.timer);
+            this.notify('turn', !keepTurn);
 
             return true;
         }
 
         this.timer -= 1;
-        super.notify('timer', this.timer);
+        this.notify('timer', this.timer);
 
         return false;
     }
@@ -56,6 +56,7 @@ module.exports = class Player {
             })
         } else if (event === "turn") {
             this.observers[event].map((observer) => {
+                console.log("Said hello");
                 observer.turnChange(value);
             })
         }

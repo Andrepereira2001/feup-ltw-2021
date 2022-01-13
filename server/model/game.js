@@ -94,7 +94,10 @@ module.exports = class Game {
     }
 
     verifyMove(player,move){
-        return this.players[this.nextPlayer].name === player && this.board.isValidMove(this.nextPlayer,move);
+        let ret = this.players[this.nextPlayer].name === player;
+        ret = ret && this.board.isValidMove(this.nextPlayer,move);
+        ret = ret && this.players[2] !== undefined
+        return ret;
     }
 
     /*------------End Game---------------*/

@@ -59,28 +59,28 @@ module.exports.getGame = (hash) => {
 }
 
 module.exports.leaveGame = (hash, player) => {
-    const winner = games[hash].leaveGame(player);
-    if (winner !== undefined){
-        updater.updateGame(hash,{winner: winner})
-        
-    }
+    if(games[hash] !== undefined){
+        const winner = games[hash].leaveGame(player);
+        if (winner !== undefined){
+            updater.updateGame(hash,{winner: winner})
+        }
 
-    if(waitingGames[games[hash].group][games[hash].board.nHoles][games[hash].board.nSeeds] !== undefined){
-        waitingGames[games[hash].group][games[hash].board.nHoles][games[hash].board.nSeeds] = undefined;
-    }
+        if(waitingGames[games[hash].group][games[hash].board.nHoles][games[hash].board.nSeeds] !== undefined){
+            waitingGames[games[hash].group][games[hash].board.nHoles][games[hash].board.nSeeds] = undefined;
+        }
 
-    delete games[hash];
-    updater.forgetGame(hash);
+        delete games[hash];
+        updater.forgetGame(hash);
+    }
 }
 
 module.exports.notifyGame = (hash, player, move, callback) => {
     console.log(hash, player, move);
-    if(games[hash].verifyMove(player,move)){
+    if(games[hash] !== undefined && games[hash].verifyMove(player,move)){
         console.log("veryfied");
         //DO MOVE
         //updater.updateGame(hash,{winner: winner})
     }else {
-        console.log("veryfied erro");
         callback({
             status: 400,
             body: "error: Not your turn to play" 

@@ -109,6 +109,55 @@ module.exports.leave = (data, callback) => {
     })
 }
 
+module.exports.notify = (data, callback) => {
+    if (data.nick === undefined || data.password === undefined) {
+        callback(null, {
+            status: 400,
+            error: "Error: Invalid request"
+        })
+    }
+
+    file.readCredentials((err, req) => {
+        if (!err) {
+            const password = crypto
+                .createHash('sha256')
+                .update(data.password)
+                .digest('hex');
+
+            if (req[data.nick] === password) {
+                const gameHash = data.game;
+                const player = data.nick;
+                const move = data.move;
+                if(move < 0 || isNaN(move)){
+                    callback({
+                        status: 400,
+                        body: "Error: Invalid move"
+                    });
+                }
+                else {
+                    game.notifyGame(gameHash,player, move, (err,res) => {
+                        if(!err){
+
+                            callback(null, { });
+                        }
+                        else {
+                            console.log("model error", err);
+                            callback(err);
+                        }
+                    });
+
+                }
+
+            } else {
+                callback(null, {
+                    status: 401,
+                    body: "Error: User registered with a different password"
+                });
+            }
+        }
+    })
+}
+
 module.exports.ranking = (callback) => {
     file.readRanking((err, req) => {
         if (!err) {

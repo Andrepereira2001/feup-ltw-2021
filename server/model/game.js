@@ -93,6 +93,10 @@ module.exports = class Game {
         }
     }
 
+    verifyMove(player,move){
+        return this.players[this.nextPlayer].name === player && this.board.isValidMove(this.nextPlayer,move);
+    }
+
     /*------------End Game---------------*/
 
     verifyEnd() {

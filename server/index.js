@@ -94,9 +94,6 @@ function doGet(pathname, request, response, callback) {
             const params = url.parse(request.url, true).query;
             updater.rememberGame(params.game, response, (err, res) => {
                 if(!err){
-                    request.on('close', () => {
-                        //updater.forgetGame(params.game,response)
-                    });
                     const message = model.get(params.game);
                     if(message !== undefined){
                         updater.updateGame(params.game, message)
@@ -119,14 +116,6 @@ function doPost(pathname, request, callback) {
     var answer = {};
 
     switch (pathname) {
-        // case '/incr':
-        //     model.incr();
-        //     updater.update(model.get());
-        //     break;
-        // case '/reset':
-        //     model.reset();
-        //     updater.update(model.get());
-        //     break;
         case '/register':
             let body = '';
             request.on('data', (chunk) => {
@@ -165,7 +154,6 @@ function doPost(pathname, request, callback) {
                 .on('error', (err) => { console.log(err.message); });
             break;
 
-
         case '/leave':
             let leaveBody = '';
             request.on('data', (chunk) => {
@@ -175,6 +163,25 @@ function doPost(pathname, request, callback) {
                     try {
                         const data = JSON.parse(leaveBody);
                         model.leave(data, (err, answer) => {
+                            callback(err, answer);
+                        });
+                    } catch (err) {
+                        answer.status = 400;
+                        callback(err, answer);
+                    } /* erros de JSON */
+                })
+                .on('error', (err) => { console.log(err.message); });
+            break;
+
+        case '/notify':
+            let notifyBody = '';
+            request.on('data', (chunk) => {
+                    notifyBody += chunk;
+                })
+                .on('end', () => {
+                    try {
+                        const data = JSON.parse(notifyBody);
+                        model.notify(data, (err, answer) => {
                             callback(err, answer);
                         });
                     } catch (err) {

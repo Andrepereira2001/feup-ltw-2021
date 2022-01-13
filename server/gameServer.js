@@ -72,3 +72,18 @@ module.exports.leaveGame = (hash, player) => {
     delete games[hash];
     updater.forgetGame(hash);
 }
+
+module.exports.notifyGame = (hash, player, move, callback) => {
+    console.log(hash, player, move);
+    if(games[hash].verifyMove(player,move)){
+        console.log("veryfied");
+        //DO MOVE
+        //updater.updateGame(hash,{winner: winner})
+    }else {
+        console.log("veryfied erro");
+        callback({
+            status: 400,
+            body: "error: Not your turn to play" 
+        });
+    }
+}

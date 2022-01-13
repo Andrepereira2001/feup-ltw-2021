@@ -1,5 +1,8 @@
-const baseUrl = "http://twserver.alunos.dcc.fc.up.pt:8008";
+//const baseUrl = "http://twserver.alunos.dcc.fc.up.pt:8008";
 //const baseUrl = "http://localhost:3000";
+
+const baseUrl = "http://twserver.alunos.dcc.fc.up.pt:8972";
+
 
 function register(username, password, callback) {
     const url = baseUrl + "/register";

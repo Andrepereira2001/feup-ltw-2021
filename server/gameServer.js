@@ -82,6 +82,7 @@ module.exports.notifyGame = (hash, player, move, callback) => {
         const message = games[hash].printBoard();
         message.pit = move;
         updater.updateGame(hash,message);
+        callback(null,{});
     }else {
         callback({
             status: 400,

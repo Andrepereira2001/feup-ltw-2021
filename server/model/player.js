@@ -1,3 +1,5 @@
+const file = require('../file.js');
+
 module.exports = class Player {
     constructor(player) {
         this.observers = {};
@@ -36,7 +38,27 @@ module.exports = class Player {
         return false;
     }
 
-    saveResult() {}
+    saveResult(win,ranking) {
+        let found = false;
+        ranking.forEach(element => {
+            if(element.nick === this.name){
+                found = true;
+                element.games = element.games + 1;
+                if(win){
+                    element.victories = element.victories + 1;
+                }
+            }
+        });
+
+        if(!found){
+            ranking.push({
+                nick: this.name,
+                games: 1,
+                victories: win ? 1 : 0 
+            })
+        }
+        
+    }
 
     addObserver(event, observer) {
         if (this.observers[event] === undefined) {
@@ -56,7 +78,6 @@ module.exports = class Player {
             })
         } else if (event === "turn") {
             this.observers[event].map((observer) => {
-                console.log("Said hello");
                 observer.turnChange(value);
             })
         }

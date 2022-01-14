@@ -75,18 +75,34 @@ module.exports.leaveGame = (hash, player) => {
 }
 
 module.exports.notifyGame = (hash, player, move, callback) => {
-    console.log(hash, player, move);
-    if(games[hash] !== undefined && games[hash].verifyMove(player,move)){
-        //DO MOVE
-        games[hash].makeMove(player,move);
-        const message = games[hash].printBoard();
-        message.pit = move;
-        updater.updateGame(hash,message);
-        callback(null,{});
-    }else {
+    if(games[hash] !== undefined){
+        let boardMove = move
+        if(games[hash].players[2].name === player){
+            boardMove = games[hash].board.nHoles - move - 1;
+        }
+        if(games[hash].verifyMove(player,boardMove)){
+            games[hash].makeMove(player,boardMove);
+            const message = games[hash].printBoard();
+            message.pit = move;
+            updater.updateGame(hash,message);
+
+            if(message.winner !== undefined){
+                delete games[hash],
+                updater.forgetGame(hash);
+            }
+
+            callback(null,{});
+        }else {
+            callback({
+                status: 400,
+                body: "error: Not your turn to play" 
+            });
+        }
+    }
+    else{
         callback({
             status: 400,
-            body: "error: Not your turn to play" 
+            body: "error: Invalid game hash" 
         });
     }
 }

@@ -97,7 +97,7 @@ module.exports.leave = (data, callback) => {
 
                 game.leaveGame(gameHash, data.nick);
 
-                callback(null, res);
+                callback(null, {});
 
             } else {
                 callback(null, {

@@ -1,5 +1,6 @@
 const Board = require("./board.js");
 const Player = require("./player.js");
+const file = require('../file.js');
 
 // import { leave } from "../utils/requests.js";
 
@@ -9,6 +10,7 @@ module.exports = class Game {
         this.board = new Board(nHoles, nSeeds);
         this.players = [];
         this.nextPlayer = 1;
+        this.gameEnd = false;
 
         this.loopingTimeout = null;
         this.gameRef = null;
@@ -65,6 +67,17 @@ module.exports = class Game {
             stores: {
                 [this.players[1].name] : this.board.storage1.seeds.length,
                 [this.players[2].name] : this.board.storage2.seeds.length
+            }
+        }
+
+        if(this.gameEnd) {
+            if(this.board.storage1.seeds.length > this.board.storage2.seeds.length){
+                state.winner = this.players[1].name;
+            }else if(this.board.storage1.seeds.length < this.board.storage2.seeds.length){
+                state.winner = this.players[2].name;
+            }
+            else {
+                state.winner = null
             }
         }
         return state
@@ -124,6 +137,8 @@ module.exports = class Game {
     endGame() {
         clearTimeout(this.loopingTimeout);
 
+        this.gameEnd = true;
+
         for (let i = 0; i < this.board.holes1.length; i++) {
             const seeds1 = this.board.holes1[i].removeSeeds();
             this.board.storage1.seeds = this.board.storage1.seeds.concat(seeds1);
@@ -132,8 +147,26 @@ module.exports = class Game {
             this.board.storage2.seeds = this.board.storage2.seeds.concat(seeds2);
         }
 
-        this.players[2].saveResult();
-        this.players[1].saveResult();
+
+        if(this.gameEnd) {
+            file.readRanking((err,res) => {
+                if(this.board.storage1.seeds.length > this.board.storage2.seeds.length){
+                    this.players[1].saveResult(true,res.ranking);
+                    this.players[2].saveResult(false,res.ranking);
+                }else if(this.board.storage1.seeds.length < this.board.storage2.seeds.length){
+                    this.players[1].saveResult(false,res.ranking);            
+                    this.players[2].saveResult(true);
+                }
+                else {
+                    this.players[1].saveResult(false,res.ranking);
+                    this.players[2].saveResult(false,res.ranking);
+                }
+
+                file.writeRanking(res,() => {
+                });
+            })
+            
+        }
     }
 
     /*------------Observer Functions---------------*/

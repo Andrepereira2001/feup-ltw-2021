@@ -16,7 +16,7 @@ module.exports = class Player {
     }
 
     resetTimer() {
-        this.timer = 120;
+        this.timer = 10;
     }
 
     //returns true if the player can play again

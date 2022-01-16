@@ -162,6 +162,9 @@ class Game {
             if (this.players[1].username === winner && state.board === undefined) {
                 this.display.endGame('PLAYER 2 LEFT! YOU WIN!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
             }
+            else {
+                this.display.endGame('YOUR TIME RUN OUT!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
+            }
             this.gameRef = null;
             return true;
         }
@@ -223,8 +226,6 @@ class Game {
         this.players[2].removeObservers();
         this.display.erase();
     }
-
-
 
     /*------------Observer Functions---------------*/
 

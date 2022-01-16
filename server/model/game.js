@@ -33,6 +33,8 @@ module.exports = class Game {
             this.players[2].setBoard(this.board);
             this.players[2].setSide(2);
             this.players[2].resetTimer();   
+
+            this.players[1].resetTimer();
         }
     }
 

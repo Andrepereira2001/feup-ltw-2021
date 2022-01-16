@@ -5,12 +5,14 @@ const file = require('../file.js');
 // import { leave } from "../utils/requests.js";
 
 module.exports = class Game {
-    constructor(nHoles, nSeeds, player,group) {
+    constructor(nHoles, nSeeds, player,group,hash,timeout ) {
         this.group = group;
         this.board = new Board(nHoles, nSeeds);
         this.players = [];
         this.nextPlayer = 1;
         this.gameEnd = false;
+        this.hash = hash;
+        this.timeoutFunc = timeout;
 
         this.loopingTimeout = null;
         this.gameRef = null;
@@ -35,6 +37,7 @@ module.exports = class Game {
     }
 
     leaveGame(player){
+        clearTimeout(this.loopingTimeout);
         if(this.players[1].name === player){
             if(this.players[2] === undefined){
                 return null;
@@ -89,7 +92,7 @@ module.exports = class Game {
 
         this.loopingTimeout = setTimeout(() => { this.start() }, 1000);
 
-        this.handleEvent();
+        this.makeMove();
 
     }
 
@@ -173,7 +176,8 @@ module.exports = class Game {
 
     timerInterrupt(time) {
         if (time === 0) {
-            this.leaveGame();
+            clearTimeout(this.loopingTimeout);
+            this.timeoutFunc(this.hash,this.players[this.nextPlayer].name)
         }
     }
 

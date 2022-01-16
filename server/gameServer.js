@@ -19,15 +19,7 @@ const newGameHash = (group,nHoles,nSeeds) => {
                     .digest('hex');
     return gameHash;
 }
-/*
-games = {
-    72 : {
-        6 : {
-            4 : i12g3123nabakjsdbkj1b231ash
-        }
-    }
-}
-*/
+
 module.exports.joinGame = (group,nHoles,nSeeds,player) => {
 
     if(waitingGames[group] === undefined){
@@ -41,7 +33,8 @@ module.exports.joinGame = (group,nHoles,nSeeds,player) => {
     if(hash === undefined){
         hash = newGameHash(group,nHoles,nSeeds);
         updater.createGame(hash);
-        games[hash] = new Game(nHoles,nSeeds,player,group);
+        games[hash] = new Game(nHoles,nSeeds,player,group,hash,this.leaveGame);
+        games[hash].start();
         waitingGames[group][nHoles][nSeeds] = hash;
     }
     else {

@@ -160,7 +160,7 @@ module.exports = class Game {
                     this.players[2].saveResult(false,res.ranking);
                 }else if(this.board.storage1.seeds.length < this.board.storage2.seeds.length){
                     this.players[1].saveResult(false,res.ranking);            
-                    this.players[2].saveResult(true);
+                    this.players[2].saveResult(true,res.ranking);
                 }
                 else {
                     this.players[1].saveResult(false,res.ranking);

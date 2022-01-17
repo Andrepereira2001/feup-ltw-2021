@@ -162,7 +162,7 @@ class Game {
             if (this.players[1].username === winner && state.board === undefined) {
                 this.display.endGame('PLAYER 2 LEFT! YOU WIN!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
             }
-            else {
+            else if(this.players[2].username === winner && state.board === undefined){
                 this.display.endGame('YOUR TIME RUN OUT!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
             }
             this.gameRef = null;

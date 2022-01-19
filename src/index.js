@@ -5,8 +5,10 @@ let PORT = 8972;
 let http = require('http');
 let url = require('url');
 
-let model = require('./model.js');
-let updater = require('./updater.js');
+let model = require('./server/model.js');
+let updater = require('./server/updater.js');
+
+let staticServer = require('./server/static.js');
 
 const headers = {
     plain: {
@@ -31,19 +33,8 @@ const server = http.createServer(function(request, response) {
 
     switch (request.method) {
         case 'GET':
-            response.writeHead(200, headers['sse']);
             doGet(pathname, request, response, (error, answer = {}) => {
-                if(!error){
-                    if(answer.status !== undefined && answer.status !== 200){
-                        response.writeHead(answer.status, headers['sse']);
-                    }
-                    if (answer.body === undefined) {
-                        response.write(JSON.stringify({}) + '\n\n');
-                    } else {
-                        response.write(JSON.stringify(answer.body) +  '\n\n');
-                    }
-                }
-                else {
+                if (error) {
                     response.writeHead(error.status, headers['plain']);
                     response.end(JSON.stringify(error.body));
                 }
@@ -51,8 +42,8 @@ const server = http.createServer(function(request, response) {
             break;
         case 'POST':
             doPost(pathname, request, (error, answer = {}) => {
-                console.log("callback", answer);
-                if(!error){
+                
+                if (!error) {
                     if (answer.status === undefined)
                         answer.status = 200;
                     if (answer.style === undefined)
@@ -67,8 +58,8 @@ const server = http.createServer(function(request, response) {
                             response.end(JSON.stringify(answer.body));
                         }
                     }
-                }
-                else {
+                } else {
+                    console.log("erro",error);
                     response.writeHead(error.status, headers['plain']);
                     response.end(JSON.stringify(error.body));
                 }
@@ -93,19 +84,20 @@ function doGet(pathname, request, response, callback) {
         case '/update':
             const params = url.parse(request.url, true).query;
             updater.rememberGame(params.game, response, (err, res) => {
-                if(!err){
+                if (!err) {
+                    response.writeHead(200, headers['sse']);
                     const message = model.get(params.game);
-                    if(message !== undefined){
+                    if (message !== undefined) {
                         updater.updateGame(params.game, message)
                     }
-                    callback(null,res)
-                }else {
+                    callback(null, res)
+                } else {
                     callback(err);
                 }
             });
             break;
         default:
-            answer.status = 400;
+            staticServer.call(request, response);
             break;
     }
 

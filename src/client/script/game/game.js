@@ -77,7 +77,6 @@ class Game {
     setGameRef(gameRef, error) {
         if (gameRef != null) {
             this.gameRef = gameRef;
-            console.log(this);
             this.display.setupUpdate(this.players[1].username, gameRef, (state) => { this.updateMultiplayer(state) });
         } else {
             alert(error);
@@ -156,16 +155,18 @@ class Game {
         const winner = state.winner;
 
         if (winner === null) {
+            this.display.endGame('NO ONE APPEARED!', 0,0);
+            this.leaveGame();
             this.gameRef = null;
             return true;
         } else if (winner !== undefined) {
-            if (this.players[1].username === winner && state.board === undefined) {
+            if (this.players[1].username === winner) {
                 this.display.endGame('PLAYER 2 LEFT! YOU WIN!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
-            }
-            else if(this.players[2].username === winner && state.board === undefined){
+            } else if (this.players[1].username !== winner) {
                 this.display.endGame('YOUR TIME RUN OUT!', this.board.storage1.seeds.length, this.board.storage2.seeds.length);
             }
             this.gameRef = null;
+            this.leaveGame();
             return true;
         }
 

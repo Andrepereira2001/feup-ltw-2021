@@ -387,6 +387,5 @@ function loadButtons() {
 
 
 window.onload = () => {
-    console.log("loading");
     loadButtons();
 }

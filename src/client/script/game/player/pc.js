@@ -33,7 +33,6 @@ class PC extends Player {
     saveResult(){
         let board =  JSON.parse(localStorage.getItem("board"));
         if(!board){
-            console.log("not board")
             board = {
                 easy:{
                     victories: 0,

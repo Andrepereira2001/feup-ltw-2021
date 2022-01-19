@@ -9,7 +9,7 @@
 
 body {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 200px;
     grid-template-rows: 1fr 6fr 70px;
     background-color: #333433;
     color: white;
@@ -744,21 +744,6 @@ footer {
     background-color: #636161;
 }
 
-cursor: pointer;
-display: inline-block;
-font-family: arial;
-font-weight: bold;
-position: absolute;
-top: -20px;
-right: -20px;
-font-size: 25px;
-line-height: 30px;
-width: 30px;
-height: 30px;
-text-align: center;
-color: #EF5C36;
-
-}
 .popup-close:hover {
     background-color: #868585;
 }

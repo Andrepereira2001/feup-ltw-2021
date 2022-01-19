@@ -2,12 +2,6 @@ const file = require('./file.js');
 const crypto = require('crypto');
 const game = require('./gameServer.js');
 
-// let count = 0;
-
-// module.exports.incr = function() { count++; }
-// module.exports.reqet = function() { count = 0; }
-// module.exports.get = function() { return count; }
-
 module.exports.get = (gameHash) => {
     return game.getGame(gameHash);
 }
@@ -39,6 +33,9 @@ module.exports.register = (data, callback) => {
             } else {
                 callback(null, {});
             }
+        }
+        else {
+            callback(err);
         }
     })
 }
@@ -73,6 +70,8 @@ module.exports.join = (data, callback) => {
                     body: "Error: User registered with a different password"
                 });
             }
+        }else {
+            callback(err);
         }
     })
 }
@@ -105,6 +104,8 @@ module.exports.leave = (data, callback) => {
                     body: "Error: User registered with a different password"
                 });
             }
+        }else {
+            callback(err);
         }
     })
 }
@@ -137,11 +138,9 @@ module.exports.notify = (data, callback) => {
                 else {
                     game.notifyGame(gameHash,player, move, (err,res) => {
                         if(!err){
-
                             callback(null, { });
                         }
                         else {
-                            console.log("model error", err);
                             callback(err);
                         }
                     });
@@ -154,6 +153,8 @@ module.exports.notify = (data, callback) => {
                     body: "Error: User registered with a different password"
                 });
             }
+        }else {
+            callback(err);
         }
     })
 }
@@ -176,6 +177,8 @@ module.exports.ranking = (callback) => {
                 status: 200,
                 body: { ranking: rank }
             });
+        }else {
+            callback(err);
         }
     })
 }

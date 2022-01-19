@@ -18,11 +18,13 @@ function register(username, password, callback) {
             if (res.status === 200) {
                 callback(username, password);
             } else {
-                res.text().then((text) => { callback(null, null, text) });
+                res.text().then((text) => {
+                     callback(null, null, text)
+                    });
             }
         })
         .catch((err) => {
-            console.log("error", err)
+            callback(err);
             return false;
         })
 }
@@ -35,7 +37,6 @@ function ranking(callback) {
             body: JSON.stringify({})
         })
         .then((res) => {
-            console.log(res.status);
             if (res.status === 200) {
                 res.text().then((text) => { callback(text) });
             } else {
@@ -68,7 +69,7 @@ function join(username, password, nHoles, nSeeds, callback) {
             }
         })
         .catch((err) => {
-            console.log("error", err)
+            callback(err);
             return false;
         })
 }
@@ -93,7 +94,7 @@ function notify(username, password, gameRef, playerMove, callback) {
             }
         })
         .catch((err) => {
-            console.log("error", err)
+            callback(err);
         })
 }
 
@@ -116,7 +117,7 @@ function leave(username, password, gameRef, callback) {
             }
         })
         .catch((err) => {
-            console.log("error", err)
+            callback(err);
             return false;
         })
 }

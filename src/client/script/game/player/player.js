@@ -3,14 +3,6 @@ class Player {
         this.observers = {};
     }
 
-    play() {
-        console.log("play mau");
-    }
-
-    turn() {
-        console.log("turn mau");
-    }
-
     addObserver(event, observer) {
         if (this.observers[event] === undefined) {
             this.observers[event] = [];

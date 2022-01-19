@@ -10,7 +10,6 @@ class Display {
         this.eventSource = update(username, gameRef);
         this.eventSource.onmessage = (e) => {
             const data = JSON.parse(e.data);
-            console.log(data);
             callback(data);
         };
     }
@@ -291,8 +290,9 @@ class Display {
     /*------------Messages---------------*/
 
     updateTimer(time) {
-        this.redrawTimer(time);
-        //this.animationFrame = requestAnimationFrame(() => { this.animateTimer() });
+        if(time != undefined){
+            this.redrawTimer(time);
+        }
     }
 
     writeMessage(player, text) {

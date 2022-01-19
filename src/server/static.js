@@ -3,6 +3,7 @@ const path = require('path');
 let url = require('url');
 
 
+//const documentRoot = '/net/areas/homes/up201905650/public_html/src';
 const documentRoot = 'C:\\Users\\adbp\\Documents\\FEUP\\3ano\\1semestre\\LTW\\feup-ltw-2021\\src';
 const defaultIndex = 'index.html';
 const mediaTypes = {
@@ -71,10 +72,10 @@ module.exports.call = (req, res) => {
                 res.writeHead(500);
                 res.end();
             } else if (stats.isDirectory()) {
-                if (pathname.endsWith('\\')) {
+                if (pathname.endsWith('/')) {
                     doGetPathname(pathname + defaultIndex, res);
                 } else {
-                    res.writeHead(301, { 'Location': pathname + '\\' });
+                    res.writeHead(301, { 'Location': pathname + '/' });
                     res.end();
                 }
             } else {

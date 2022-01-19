@@ -112,7 +112,7 @@ class Game {
 
         let holeIndex = state.pit;
 
-        if (this.verifyWinner(state) && state.board === undefined) {
+        if (state.board === undefined && this.verifyWinner(state) ) {
             return;
         }
 

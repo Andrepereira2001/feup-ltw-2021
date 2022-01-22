@@ -1,7 +1,9 @@
 //const baseUrl = "http://twserver.alunos.dcc.fc.up.pt:8008";
-const baseUrl = "http://localhost:8972";
+//const baseUrl = "http://localhost:8972";
 
 //const baseUrl = "http://twserver.alunos.dcc.fc.up.pt:8972";
+
+const baseUrl = "https://feup-ltw-2021.vercel.app";
 
 
 function register(username, password, callback) {
